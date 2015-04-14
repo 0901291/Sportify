@@ -1,0 +1,10 @@
+<script src="scripts/jquery-2.1.3.min.js"></script>
+<script src="scripts/plugins/jquery.rangify/js/jquery.rangify.js"></script>
+<script src="scripts/plugins/jquery.transit/jquery.transit.min.js"></script>
+<script src="scripts/randombackground.js"></script>
+<script src="scripts/materialize.js"></script>
+<script src="scripts/scripts.js"></script>
+<script src="scripts/style.js"></script>
+<script src="scripts/nieuwelijst.js"></script>
+<script src="scripts/spotifylogin.js"></script>
+<script src="scripts/profile.js"></script>

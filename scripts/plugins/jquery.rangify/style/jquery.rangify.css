@@ -1,0 +1,85 @@
+/* IMPORTS */
+@import url(http://fonts.googleapis.com/css?family=Roboto);
+@import url(http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css);
+
+
+.rf-container {
+	position: 		relative;
+	margin-top: 	30px;
+	font-family: 	'Roboto', sans-serif;
+}
+
+/* SLIDER */
+.rf-slider {
+	-webkit-appearance: none; 
+}
+
+.rf-slider:focus {
+	outline: none;
+}
+
+.rf-slider:hover {
+	cursor: pointer;
+}
+
+.rf-slider::-webkit-slider-runnable-track {
+	height: 		5px;
+	background: 	#c2c0c2;
+	border: 		none; 
+}
+
+.rf-slider:focus::-webkit-slider-runnable-track {
+	background: #ccc; 
+}
+
+.rf-slider::-webkit-slider-thumb {
+	-webkit-appearance: 	none;
+	border: 				none;
+	height: 				21px;
+	width: 					21px;
+	border-radius: 			50%;
+	transform-origin: 		50% 50%;
+	margin: 				-8px 0 0 0;
+	-webkit-transition:		0.3s;
+	transition: 			0.3s; 
+}
+
+/* DIVIDERS */
+.rf-step-divider-container {
+	padding-left: 	10.5px;
+	margin-top: 	0px;
+	padding-bottom: 55px;
+}
+
+.rf-step-divider-inner-container {
+	position: absolute;
+}
+
+.rf-step-divider {
+	display: block;
+}
+
+.rf-step-divider-label {
+	display: 		block;
+	margin-left: 	-39%;
+}
+
+/* VALUE DISPLAY */
+.rf-value {
+	position: 		absolute;
+	border-radius: 	50%;
+	width: 			30px;
+	height: 		30px;
+	text-align: 	center;
+	line-height: 	31px;
+	font-size: 		13px;
+}
+
+.rf-value-bubble {
+	top: 			-25px;
+}
+
+.rf-value-right {
+	top: 			-6px;
+	margin-left: 	5px;
+}

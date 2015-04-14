@@ -1,0 +1,52 @@
+{
+	"results": {
+		"genrematches":	{
+			"genre": [
+				{
+					"name": "rock",
+					"artist_hot": 0.7
+				},
+				{
+					"name": "pop",
+					"artist_hot": 0.8
+				},
+				{
+					"name": "house",
+					"artist_hot": 0.7
+				},
+				{
+					"name": "acid house",
+					"artist_hot": 0.5
+				},
+				{
+					"name": "country",
+					"artist_hot": 0.5
+				},
+				{
+					"name": "jazz",
+					"artist_hot": 0.5
+				},
+				{
+					"name": "lounge",
+					"artist_hot": 0.5
+				},
+				{
+					"name": "reggae",
+					"artist_hot": 0.6
+				},
+				{
+					"name": "samba",
+					"artist_hot": 0.5
+				},
+				{
+					"name": "trance",
+					"artist_hot": 0.5
+				},
+				{
+					"name": "folk",
+					"artist_hot": 0.5
+				}
+			]
+		}
+	}
+}

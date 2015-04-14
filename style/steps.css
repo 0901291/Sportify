@@ -1,0 +1,24 @@
+#wrap{
+	padding: 0px;
+}
+
+.list-menu{
+	margin-bottom: 0px;
+}
+
+.list-menu li{
+	padding-top:       20px !important;
+	padding-bottom:    20px !important;
+}
+
+.form-field
+{
+	padding: 5px 0px !important;
+}
+
+
+.overlay {
+    position:           absolute;
+    background-color:   #fff;
+    border-radius:      2px;
+}

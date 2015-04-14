@@ -1,0 +1,431 @@
+* {
+	margin: 	0;
+	padding: 	0;
+}
+body {
+	background-size: 		cover;
+	background-repeat: 		no-repeat;
+	background-attachment: 	fixed;
+	position: 				absolute;
+	width: 					100%;
+	height: 				100%;
+	background-position: 	center;
+}
+.metro-overview .wrapper {
+	top: 0;
+}
+.wrapper {
+	width: 			100%;
+	position: 		absolute;
+	top: 			90px;
+}
+.white-container {
+	background: 			#fff;
+	margin-right: 			auto !important;
+	margin-left: 			auto !important;
+	border-radius: 			2px;
+	overflow: 				hidden !important;
+	min-height: 			400px;
+	position: 				relative;	
+}
+.stagger {
+	height: 100%;
+}
+.row.content-container {
+	padding-bottom: 20px;
+}
+header {
+	position: relative;
+	z-index: 9999;
+}
+header nav {
+	height: 	90px;
+	z-index: 	9;
+	overflow: 	auto;
+}
+header nav ul a {
+	width: 	100%;
+	height: 100%;
+}
+.side-nav {
+	z-index: 99999;
+}
+#metro-logo .brand-logo {
+	width: 98%;
+}
+#metro-overview .brand-logo {
+	padding: 0 !important;
+}
+.brand-logo {
+	padding-top: 	10px !important;
+	padding-left: 	10px !important;
+	height: 		71px !important;
+}
+#topmenu * {
+	color: #000;
+}
+#topmenu {
+	height: 91px !important;
+}
+#topmenu .menu-items {
+	line-height: 90px;
+}
+.button-collapse {
+	cursor: pointer;
+}
+.white-container.col {
+	padding: 0 !important;
+}
+/* METRO OVERVIEW */
+#metro-overview > div {
+	display: 	block;
+	float: 		left;
+	margin: 	6px;
+	position: relative;
+}
+#metro-overview > div:hover {
+	cursor: pointer;
+}
+#metro-logo:hover, #metro-logo div:hover {
+	cursor: auto !important;
+}
+#metro-overview > div .metro-label {
+	position: absolute;
+	bottom: 0;
+	display: block;
+	width: 100%;
+	height: 90px;
+	text-align: center;
+	line-height: 90px;
+	color: #fff;
+	font-size: 30px;
+}
+#metro-overview > div .metro-icon {
+	font-size: 10em;
+	text-align: center;
+	display: block;
+	color: #fff;
+	text-shadow: 1px 1px 6px #777;
+}
+@media only screen and (min-width: 992px) {
+	.white-container {
+		width: 	400px !important;
+	}
+	h2.header {
+		width: 400px !important;
+	}
+}
+@media only screen and (min-width: 601px) and (max-width: 991px) {
+	.white-container {
+		width: 	300px !important;
+	}
+	h2.header {
+		width: 300px !important;
+	}
+}
+@media only screen and (max-width: 600px) {
+	.white-container {
+		box-shadow: 	none;
+		border-radius: 	0;
+	}
+	header nav {
+		box-shadow: none;
+	}
+	.brand-logo {
+		padding-top: 	0 !important;
+		padding-left: 	0 !important;
+	}
+}
+a {
+	color: #000;
+}
+.button-collapse {
+	margin-top: 	17px;
+	margin-left: 	17px;
+}
+.button-collapse i {
+	color: white !important;
+}
+.next-button-container {
+	position: 	absolute;
+	bottom: 	5px;
+	right: 		5px;
+}
+.next-button {
+	padding: 	0px 20px;
+	margin: 	0;
+}
+.button-container-home li:nth-child(1) {
+	border-top-left-radius: 2px;
+}
+.button-container-home li:nth-child(2) {
+	border-top-right-radius: 2px;
+}
+h2.header {
+	color: 		#fff;
+	margin: 	0;
+	font-size: 	1.2rem;
+	text-align: center;
+	width: 		100%;
+	z-index: 	9;
+}
+.back-arrow {
+	position: 	absolute;
+	left: 		10px;
+	width: 		30px;
+	height: 	56px;
+}
+.back-arrow span {
+	color: 			#fff;
+	font-size: 		25px;
+	line-height: 	56px;
+}
+.back-arrow span:hover {
+	cursor: pointer;
+}
+.page-navigation:hover {
+	cursor: pointer;
+}
+/* INTERVAL TRAINING */
+#interval-container {
+	padding: 		0;
+	margin-top: 	20px;
+	border-radius: 	2px;
+	overflow: 		hidden;
+}
+li.interval-item {
+	list-style: none;
+	position: 	relative;
+}
+li.interval-item:nth-child(even) {
+	background: #eee; /* Walk */
+}
+li.interval-item:nth-child(odd) {
+	background: #ddd; /* Run */
+}
+li.interval-item.special-interval {
+	background: #29b6f6;
+}
+li.interval-item .interval-label {
+	display: block;
+	padding-top: 10px;
+}
+.floating-button {
+	position: 	absolute;
+	width: 		40px !important;
+	height: 	40px !important;
+}
+.floating-button i {
+	line-height: 	40px !important;
+}
+#add-interval {
+	top: 		315px;
+	right: 		15px;
+}
+#remove-interval {
+	top: 		365px;
+	right: 		15px;
+}
+.interval-item i {
+	line-height: 	30px !important;
+	font-size: 		1.2em !important;
+	/*display: block;*/
+	/*padding: 5px 5px 0px 5px;*/
+}
+.interval-add-minute-container {
+	left: 	10px;
+	top: 	15px;
+	width: 	30px !important;
+	height: 30px !important;
+}
+.interval-substract-minute-container {
+	right: 	10px;
+	top: 	15px;
+	width: 	30px !important;
+	height: 30px !important;
+}
+/* PLAYLIST VIEW */
+#songs {
+	margin-top: 0.75em;
+}
+#songs .song:nth-child(odd) {
+	background-color: #F5F5F5;
+}
+#songs .song:nth-child(even) {
+	background-color: white;
+}
+.song {
+	position: 	relative;
+	text-align: left;
+}
+.play {
+	z-index: 				900;
+	position: 				absolute;
+	top: 					17px;
+	left: 					17px;
+	line-height: 			1.1;
+	color: 					white;
+	-webkit-text-stroke: 	1px rgba(0, 0, 0, 0.3);
+}
+.play-image img:hover, .play:hover {
+	cursor: pointer;
+}
+.play-image {
+	width: 	64px;
+	height: 64px;
+	margin: 0px !important;
+}
+.play-image img {
+	width: 	inherit;
+	height: inherit;
+}
+.play-image i {
+	width: 	30px;
+	height: 30px;
+}
+.songInfo {
+	position: 	absolute;
+	left: 		74px;
+	top: 		12px;
+}
+.songTitle {
+	font-weight: 	bold;
+	font-size: 		1.1em;
+}
+.songArtist {
+	font-style: italic;
+	font-size: 	1em;
+}
+#chooseProfile {
+	z-index:   10000;
+	margin-top: 50px;
+}
+#profiles {
+	overflow: auto;
+}
+#profiles li {
+	float: left;
+}
+.profileBox {
+	width: 				90px;
+	height: 			90px;
+	text-align: 		center;
+	font-size: 			1em;
+	background-color: 	#F5F5F5;
+	margin: 			3px;
+	line-height: 		90px;
+}
+.profileBox:hover {
+	cursor: pointer;
+}
+.remove-song {
+	position: 		absolute;
+	right: 			5px;
+	top: 			0;
+	line-height: 	64px;
+}
+.remove-song:hover {
+	cursor: pointer;
+}
+.list-menu li.choose-personalized-button {
+	padding: 		36px 0 !important;
+	font-size: 17px;
+}
+.border-bottom {
+	border-bottom: 	1px rgba(0,0,0,0.2) solid;
+}
+.border-bottom:nth-child(1) {
+	border-top: 1px rgba(0,0,0,0.2) solid;
+}
+.logo-over {
+	width: 28%;
+	margin: 2px 5px;
+	float: left;
+}
+.logo-over:hover {
+	cursor: pointer;
+}
+#spotifyLogo {
+	margin-left: auto;
+	margin-right: auto;
+}
+#echonestLogo {
+	float: left;
+	margin-left: 20px;
+	margin-top: 10px;
+}
+.logoImages {
+	margin-top: 20px;
+}
+.text {
+	margin: 15px auto;
+	display: block;
+	height: 79px !important;
+	padding-bottom: 20px;
+	padding-top: 20px;
+}
+.spotify-logo-mini {
+	position: relative;
+	left: -7px;
+	top: 6px;
+	width: 20px;
+}
+.veel-sportplezier {
+	font-size: 20px;
+	margin-top: 40px;
+	text-align: center;
+}
+#loading-playlist-bar-container {
+	margin-top: 50px;
+}
+#spinner-loading-playlist {
+	margin-top: 140px;
+}
+#loading-playlist {
+	margin-top: 20px;
+	font-style: italic;
+}
+h3.intro-subtitle {
+	font-size: 15px;
+	font-weight: normal;
+	padding: 0 0.75em;
+	text-align: center;
+	line-height: 20px;
+}
+#toast-container {
+	z-index: 10000000;
+}
+#playlistlink {
+	padding: 8px 0.2em;
+	font-size: 13px;
+	height: 50px !important;
+}
+h4, h5 {
+	font-size: 20px;
+}
+#playlist-pagination {
+	margin-left: 12px;
+	margin-top: 10px;
+	bottom: 0;
+	position: absolute;
+	padding-bottom: 40px;
+}
+#playlist-pagination .disabled {
+	color: lightgrey;
+}
+#playlists {
+	padding-bottom: 50px !important;
+}
+@media only screen and (max-width: 600px) {
+	#playlist-pagination {
+		margin-left: 0 !important;
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+	}
+}
+
+
+
+
+
+
