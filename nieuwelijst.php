@@ -14,7 +14,7 @@
 	<head>
 		<?php require ('includes/headincludes.php') ?>
 		<link rel="stylesheet" href="style/steps.css">
-		<title>Nieuwe lijst maken<?= TITLE_SUFFIX ?></title>
+		<title>Nieuwe lijst<?= TITLE_SUFFIX ?></title>
 	</head>
 	<body>
 		<?php require ('includes/header.php') ?>
