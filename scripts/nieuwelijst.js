@@ -382,6 +382,10 @@ function validateSpotifySongs (songs, arrayToUse) {
             })
             arrayToUse.push([this.id, artistnames.join(", "), this.name, this.duration_ms, this.preview_url, this.album.images[2].url]);
         };
+        if (localStorage.trainingType == "intervaltraining")
+            setProgressBar (0.5, rightSongs[0].length + rightSongs[1].length);
+        else
+            setProgressBar (1, rightSongs[0].length);
     })
 }
 
@@ -394,12 +398,14 @@ function findSpotifyEquivalents () {
             getSeveralTracks(songInfo[0].slice(51, songInfo[0].length).join(","), rightSongs[0]);
         else
             $.when(getSeveralTracks(songInfo[0].slice(51, songInfo[0].length).join(","), rightSongs[0])).then(generatePlaylist);
+        setProgressBar (1, 10);
     }
     else {
         if (localStorage.trainingType == "intervaltraining")
             getSeveralTracks(songInfo[0].join(","), rightSongs[0]);
         else (localStorage.trainingType == "intervaltraining")
             $.when(getSeveralTracks(songInfo[0].join(","), rightSongs[0])).then(generatePlaylist);
+        setProgressBar (1, 10);
     }
 
     if (localStorage.trainingType == "intervaltraining") {
@@ -410,113 +416,8 @@ function findSpotifyEquivalents () {
         }
         else
             $.when(getSeveralTracks(songInfo[1].join(","), rightSongs[1])).then(generatePlaylist);
-
+        setProgressBar (1, 20);
     }
-
-
-
-    // i++;
-    // setProgressBar (0.5, i);
-    // if (i == length) generatePlaylist();
-
-
-
-
-
-
-
-
-
-
-
-
-    // var spotifyAPIBase = "https://api.spotify.com/v1/search?limit=1&market=NL&type=track&q=";
-    // connectionToast = setTimeout(function () {toast("Je internet snelheid is niet optimaal, het kan iets langer duren dan normaal.", 60000)}, 8000);
-    // rightSongs[0] = [];
-    // if (localStorage.trainingType == "intervaltraining") {
-    //     rightSongs[1] = [];
-    // }
-
-    // if (localStorage.trainingType == "intervaltraining") {
-    //     var i = 0;
-    //     var length = songInfo[0].length + songInfo[1].length;
-    //     $.each(songInfo[0], function (k, v) {
-    //         var info    = v[0] + " " + v[1];
-    //         var query   = info.replace(" ", "+");
-    //         $.ajax({
-    //             url: spotifyAPIBase + query,
-    //             success: function (output) {
-    //                 console.log(output);
-    //                 if ("items" in output.tracks && output.tracks.items.length != 0 && output.tracks.items[0].album.images.length == 3) {
-    //                     pushToRightSongs (rightSongs[0], [output.tracks.items[0].id, v[0], v[1], output.tracks.items[0].duration_ms, output.tracks.items[0].preview_url, output.tracks.items[0].album.images[2].url]);
-    //                 };
-    //                 i++;
-    //                 setProgressBar (0.5, i);
-    //                 if (i == length) generatePlaylist();
-    //             },
-    //             error: function (output) {
-    //                 console.log("error: ")
-    //                 console.log(output);
-    //             }
-    //         })
-    //         // $.getJSON(spotifyAPIBase + query, function(data) {
-    //         //     if ("items" in data.tracks && data.tracks.items.length != 0 && data.tracks.items[0].album.images.length == 3) {
-    //         //         pushToRightSongs (rightSongs[0], [data.tracks.items[0].id, v[0], v[1], data.tracks.items[0].duration_ms, data.tracks.items[0].preview_url, data.tracks.items[0].album.images[2].url]);
-    //         //     };
-                
-    //         // });
-    //     });
-    //     $.each(songInfo[1], function (k, v) {
-    //         var info    = v[0] + " " + v[1];
-    //         var query   = info.replace(" ", "+");
-    //         $.ajax({
-    //             url: spotifyAPIBase + query,
-    //             success: function (output) {
-    //                 console.log(output);
-    //                 if ("items" in output.tracks && output.tracks.items.length != 0 && output.tracks.items[0].album.images.length == 3) {
-    //                     pushToRightSongs (rightSongs[1], [output.tracks.items[0].id, v[0], v[1], output.tracks.items[0].duration_ms, output.tracks.items[0].preview_url, output.tracks.items[0].album.images[2].url]);
-    //                 };
-    //                 i++;
-    //                 setProgressBar (0.5, i);
-    //                 if (i == length) generatePlaylist();
-    //             },
-    //             error: function (output) {
-    //                 console.log("error: ");
-    //                 console.log(output);
-    //             }
-    //         })
-    //         // $.getJSON(spotifyAPIBase + query, function(data) {
-    //         //     if ("items" in data.tracks && data.tracks.items.length != 0 && data.tracks.items[0].album.images.length == 3) {
-    //         //         pushToRightSongs (rightSongs[1], [data.tracks.items[0].id, v[0], v[1], data.tracks.items[0].duration_ms, data.tracks.items[0].preview_url, data.tracks.items[0].album.images[2].url]);
-    //         //     };
-    //         //     i++;
-    //         //     setProgressBar (0.5, i);
-    //         //     if (i == length) generatePlaylist();
-    //         // });
-    //     });
-    // }
-    // else {
-    //     var i = 0;
-    //     var length = songInfo[0].length;
-    //     $.each(songInfo[0], function (k, v) {
-    //         var info    = v[0] + " " + v[1];
-    //         var query   = info.replace(" ", "+");
-    //         $.getJSON(spotifyAPIBase + query, function(data) {
-    //             console.log(data);               
-    //             if ("items" in data.tracks && data.tracks.items.length != 0 && data.tracks.items[0].album.images.length == 3) {
-    //                 var artists = [];
-    //                 $.each(data.tracks.items[0].artists, function (k, v) {
-    //                     artists.push(v.name);
-    //                 });
-    //                 artists = artists.join(", ");
-    //                 pushToRightSongs (rightSongs[0], [data.tracks.items[0].id, artists, v[1], data.tracks.items[0].duration_ms, data.tracks.items[0].preview_url, data.tracks.items[0].album.images[2].url])
-    //             };
-    //             i++;
-    //             setProgressBar (1, i);
-    //             if (i == length) generatePlaylist();
-    //         });
-    //     });
-    // }
 }
 
 function setProgressBar (times, count) {
