@@ -375,7 +375,7 @@ function getSeveralTracks (ids, arrayToUse) {
 function validateSpotifySongs (songs, arrayToUse) {
     var validatedSongs = [];
     $.each(songs.tracks, function () {
-        if (this.album.images.length == 3) {
+        if (this.is_playable && this.album.images.length == 3) {
             var artistnames = [];
             $.each(this.artists, function (k, v) {
                 artistnames.push(v.name);
