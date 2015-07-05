@@ -356,7 +356,7 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 		case 13:
 			echo '<div class="white-container z-depth-1">
 	                <div class="stagger">
-	                    <div class="page-navigation back-arrow" data-transition="slide" data-page="2"><span class="' . CLASS_BACK_ARROW . '"></span></div>
+	                    <div class="page-navigation back-arrow" data-transition="slide" data-page="2" data-function="removeAttributes"><span class="' . CLASS_BACK_ARROW . '"></span></div>
 	                    <h2 class="header teal">Lijst wijzigen</h2>
 	                    <h3 class="intro-subtitle">Beluister je lijst en vervang eventueel tracks.</h3>
 	                    <div class="row content-container">

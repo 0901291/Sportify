@@ -49,7 +49,7 @@ function validateDurAndBpm () {
         if (localStorage.trainingType == "standaardtraining") {
            allAttributes.push("min_tempo=" + (parseInt(localStorage.bpm) - 3), "max_tempo=" + (parseInt(localStorage.bpm) + 3), "min_energy=0.7");
         }
-        return true;     
+        return true;
     }
 }
 
@@ -203,6 +203,11 @@ function addGenresToCallInfo () {
 function removeAttributes () {
     var indexesToRemove = [];
     chosen = [];
+    songInfo[0] = [];
+    songInfo[1] = [];
+    rightSongs[0] = [];
+    rightSongs[1] = [];
+    playlist = [];
     $.each(allAttributes, function (k, v) {
         if (v.indexOf("genre") > -1 || v.indexOf("artist") > -1) {
             if (v.indexOf("genre") > -1) {
@@ -240,6 +245,7 @@ function addArtistsToCallInfo () {
 
 function skipPersonalMusic () {
     if (chosen.length == 0) {
+        intervalIteration = 1;
         chosen.push("pop", "genre");
         allAttributes.push("type=genre-radio", "genre=pop", "genre=house");
         makeURL();
@@ -439,34 +445,43 @@ function generatePlaylist () {
         var intervalScheme = JSON.parse(localStorage.intervalScheme);
         var chosenIndexesOne = [];
         var chosenIndexesTwo = [];
+        var margin = 60000;
         $.each(intervalScheme, function (k, v) {
             playtime = 0;
             if (v[0] == 2) {
                 for (var i = 0; i < rightSongs[1].length - 1; i++) {
-                    if (i < rightSongs[1].length - 1 && playtime + rightSongs[1][i][3] < v[1] + 10000 && chosenIndexesOne.indexOf(i) == -1) {
+                    if (playtime + rightSongs[1][i][3] < v[1] + margin && chosenIndexesOne.indexOf(i) == -1) {
                         pushToPlaylist (i, 1, k);
                         playtime += rightSongs[1][i][3];
                         chosenIndexesOne.push(i);
                     }
+                    else if (playtime + rightSongs[1][i][3] >= v[1] + margin)
+                        break;
+                    console.log("1: " + playtime);
                 }
             }
             else {
                for (var i = 0; i < rightSongs[0].length - 1; i++) {
-                    if (i < rightSongs[0].length - 1 && playtime + rightSongs[0][i][3] < v[1] + 10000 && chosenIndexesTwo.indexOf(i) == -1) {
+                    if (playtime + rightSongs[0][i][3] < v[1] + margin && chosenIndexesTwo.indexOf(i) == -1) {
                         pushToPlaylist (i, 0, k);
                         playtime += rightSongs[0][i][3];
                         chosenIndexesTwo.push(i);
                     }
+                    else if (playtime + rightSongs[0][i][3] >= v[1] + margin)
+                        break;
+                    console.log("2: " + playtime);
                 }
             }
         });
     }
     else {
         $.each(rightSongs[0], function (k, v) {
-            if (playtime + v[3] < duration + 30000) {
+            if (playtime + v[3] < duration + margin) {
                 playlist.push([v, k, 0]);
                 playtime += v[3];
             }
+            else if (playtime + v[3] >= duration + margin)
+                return;
         });
     };
 
