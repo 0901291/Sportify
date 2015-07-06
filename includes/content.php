@@ -672,8 +672,19 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 						        <input id="searchList" autofocus type="text" class="validate center">
 						        <label for="searchList">Zoek een lijst op naam</label>
 						    </div>
-							<ul id="searchResults" class="row list-menu">
-							</ul>
+							<table id="searchResults" class="list-menu">
+		                    	<tr>
+		                    		<th>
+		                    			
+		                    		</th>
+		                    		<th>
+		                    			Naam playlist:
+		                    		</th>
+		                    		<th>
+		                    			BPM
+		                    		</th>
+		                    	</tr>
+	                      </table>
 		    			</div>
     				</div>
                     <script>

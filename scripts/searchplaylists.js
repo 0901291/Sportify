@@ -9,6 +9,12 @@ function initSearchPlaylist ()
 function getPlaylistFromDb ()
 {
     $("#searchResults").empty();
+    $tr = $("<tr>")
+            .append($("<th>"))
+            .append($("<th>", {text: "Naam playlist:"}))
+            .append($("<th>", {text: "bpm:"}));
+        $("#searchResults")
+            .append($tr);
     launchOnResize();
     var search = $("#searchList").val();
     if (search != "") {
@@ -25,28 +31,40 @@ function getPlaylistFromDb ()
         });
     }
     else {
-        $li = $("<li>", {class: "list-menu-button col s12 center", text: "Voer een zoekresultaat in."});
-
+        $tr = $("<tr>")
+            .append($("<td>"))
+            .append($("<td>", {text: "Voer een zoekresultaat in."}));
         $("#searchResults")
-            .prepend($li);
+            .append($tr);
     }
 }
 
 function printResults (data) {
     $("#searchResults").empty();
-
+    $tr = $("<tr>")
+            .append($("<th>"))
+            .append($("<th>", {text: "Naam playlist:"}))
+            .append($("<th>", {text: "bpm:"}));
+        $("#searchResults")
+            .append($tr);
     if (data.results.length != 0) {
         $.each(data.results, function (k, v) {
-            $li = $("<li>", {"data-page":"16", "data-item": v.id, "data-transition":"slide", class: "list-menu-button page-navigation col s12 center", text: v.name});
+            console.log(v.image);
+            $tr = $("<tr>", {"data-page":"16", "data-item": v.id, "data-transition":"slide", class: "list-menu-button page-navigation border-bottom"})
+                .append($("<td>")
+                    .append("<img src='"+v.image+"'>"))
+                .append($("<td>", {text: v.name}))
+                .append($("<td>", {text: v.bpm}));
             $("#searchResults")
-                .append($li);
+                .append($tr);
         });
     }
     else {
-        $li = $("<li>", {class: "list-menu-button page-navigation col s12 center", text: "Er zijn geen resultaten gevonden."});
-        
+        $tr = $("<tr>")
+            .append($("<td>"))
+            .append($("<td>", {text: "Er zijn geen resultaten gevonden."}));
         $("#searchResults")
-            .prepend($li);
+            .prepend($tr);
     }
     launchOnResize();
 }

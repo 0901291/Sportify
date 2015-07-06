@@ -36,6 +36,8 @@ function returnSearchResults ($results)
         $item = new stdClass();
         $item -> name = $result["name"];
         $item -> id   = $result["idPlaylists"];
+        $item -> bpm   = $result["BPM"];
+        $item -> image   = $result["image"];
         array_push($object->results, $item);
     }
     
