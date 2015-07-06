@@ -440,12 +440,12 @@ function generatePlaylist () {
     $(".toast").remove();
     $("#loading-playlist-bar .determinate").css("width", "100%");
     var playtime = 0;
+    var margin = 60000;
     var duration = parseInt(localStorage.duration);
     if (localStorage.trainingType == "intervaltraining") {
         var intervalScheme = JSON.parse(localStorage.intervalScheme);
         var chosenIndexesOne = [];
         var chosenIndexesTwo = [];
-        var margin = 60000;
         $.each(intervalScheme, function (k, v) {
             playtime = 0;
             if (v[0] == 2) {
@@ -481,7 +481,9 @@ function generatePlaylist () {
                 playtime += v[3];
             }
             else if (playtime + v[3] >= duration + margin)
+            {
                 return;
+            }
         });
     };
 
