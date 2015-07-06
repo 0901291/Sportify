@@ -3,6 +3,7 @@ $(initAddPlaylist);
 function initAddPlaylist () {
     // You have to JSON.parse, else it's just a string (because you can't just store arrays in localStorage);
     var playlist = JSON.parse(localStorage.playlist);
+    localStorage.playlistImage = playlist[0][0][5];
     printSongs (playlist);
     $("#playlistName").val("Sportify - " + (localStorage.trainingType == "intervaltraining" ? "Intervaltraining" : (localStorage.bpm + " bpm")) + " - " + localStorage.duration / 60000 + " minuten - " + getDate ());
     $("#songs").on("click", ".remove-song", searchNewSong);
@@ -69,6 +70,7 @@ function searchNewSong (e) {
 
 function replaceSong (newSong, e, indexToReplace, playlist, newSongIndex) {
     usedSongs.push(newSongIndex);
+    localStorage.playlistImage = playlist[0][0][5];
     var indexOfLi = $(e.currentTarget).parent().index();
     playlist[indexOfLi][0] = newSong;
     playlist[indexOfLi][1] = newSongIndex;
@@ -178,7 +180,9 @@ function addPlaylistToDatabase () {
             playlist: JSON.parse(localStorage.playlist),
             name: $("#playlistName").val(),
             description: $("#playlistDescription").val(),
-            trainingType: localStorage.trainingType
+            trainingType: localStorage.trainingType,
+            bpm: localStorage.bpm,
+            image: localStorage.playlistImage
         },
         success: function (d) {
             nextPage(11, "slide");

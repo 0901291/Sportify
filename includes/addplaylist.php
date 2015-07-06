@@ -7,8 +7,8 @@
 	function addPlaylistToDatabase ($conn) 
 	{
 		$addPlaylistQuery =
-			"INSERT INTO " . DB_PREFIX . "playlists (name, description, profiles_idProfiles) 
-			VALUES ('" . htmlentities($_POST["name"]) . "', '" . htmlentities($_POST["description"]) . "', " . htmlentities($_COOKIE["profile"]) . ")";
+			"INSERT INTO " . DB_PREFIX . "playlists (name, description, profiles_idProfiles, BPM, image) 
+			VALUES ('" . htmlentities($_POST["name"]) . "', '" . htmlentities($_POST["description"]) . "', '" . htmlentities($_COOKIE["profile"]) . "', '" . htmlentities($_POST["bpm"]) . "', '" . htmlentities($_POST["image"]) . "')";
 		$conn -> query($addPlaylistQuery);
 		$schemeIds = [];
 		if ($_POST["scheme"] != null)

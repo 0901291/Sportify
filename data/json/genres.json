@@ -1,7 +1,7 @@
 {
 "results": {
-	"genrematches": {
-		"genre": [
+		"genrematches":	{
+			"genre": [
 				{
 					"name": "rock",
 					"artist_hot": 0.7
@@ -121,7 +121,7 @@
 				{
 					"name": "workout",
 					"artist_hot": 0.4
-				},
+				}
 			]
 		}
 	}

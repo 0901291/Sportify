@@ -382,7 +382,7 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 	            $data   = getProfilePlaylists($conn);
 	            
 	            while ($row = $data -> fetch_assoc()) {
-	                echo '<li data-page="16" data-transition="slide" data-item="'. $row["idPlaylists"] .'" class="page-navigation border-bottom col s12 center">' . $row["name"] . '</li>';
+	                echo '<tr data-page="16" data-transition="slide" data-item="'. $row["idPlaylists"] .'" class="page-navigation border-bottom"> <td><img src="'. $row["image"] . '"></td><td>'. $row["name"] . '</td> <td> '. $row["BPM"] . '</td></tr>';
 	            }
 
 	            if ($data->num_rows == 0)
@@ -403,9 +403,20 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 	               <div class="page-navigation back-arrow" data-transition="slide" data-page="home"><span class="' . CLASS_BACK_ARROW . '"></span></div>
 	               <h2 class="header teal">Mijn lijsten</h2>
 	               <div class="row content-container">
-	                    <ul class="row list-menu">
+	                    <table>
+	                    	<tr>
+	                    		<th>
+	                    			
+	                    		</th>
+	                    		<th>
+	                    			Naam playlist:
+	                    		</th>
+	                    		<th>
+	                    			BPM
+	                    		</th>
+	                    	</tr>
 	                            '; printProfilePlaylists($conn);  echo '
-	                      </ul>
+	                      </table>
 	               </div>
 	           </div>
 	         </div>';
