@@ -36,6 +36,7 @@ function validateDurAndBpm () {
     var duration = $("#duration").val();
     var bpm      = $("#bpm").val();
     if (duration == "" || bpm == "" || !$.isNumeric(duration) || !$.isNumeric(bpm) || typeof duration === undefined || typeof bpm === undefined || duration > 180 || duration < 5) {
+        $("div[data-function='validateDurAndBpm']").addClass("page-navigation");
         toast("Graag alleen getallen invoeren. Duur mag minimaal 5 en maximaal 180 zijn.", 4000);
         return false;
     }
@@ -197,13 +198,14 @@ function addGenresToCallInfo () {
             makeURL();
         }
         else {
-            console.log("skippy");
-            skipPersonalMusic ();
+            console.log("No genres chosen");
+            //skipPersonalMusic ();
         }
     });
 }
 
 function removeAttributes () {
+    console.log("remove");
     var indexesToRemove = [];
     chosen              = [];
     songInfo[0]         = [];
@@ -369,11 +371,9 @@ function pushOutputToSongsArray (output) {
         }
     }
     else {
-        console.log(prevPage);
-        $.when(getNextPage(prevPage, "slide", "")).then(function(){
-            toast("Er zijn geen (geschikte) liedjes gevonden. Probeer het nog een keer of baseer je muziek op iets anders.", 7000);
-            removeAttributes();
-        });
+        removeAttributes();
+        getNextPage(2, "slide", "");
+        toast("Er zijn geen (geschikte) liedjes gevonden. Probeer het nog een keer of baseer je muziek op iets anders.", 7000);
     }   
 }
 

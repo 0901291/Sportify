@@ -21,8 +21,10 @@ function init () {
 }
 
 function nextPage (e, transition) {
+    $(e.currentTarget).removeClass("page-navigation");
+
 	if (typeof $(e.currentTarget).attr("data-function") !== typeof undefined && $(e.currentTarget).attr("data-function") !== false) {
-		$(e.currentTarget).removeClass("page-navigation");
+        console.log("deleting page nav");
 		var functionReturn = window[$(e.currentTarget).attr("data-function")]();
 	}
 	else {
@@ -32,7 +34,7 @@ function nextPage (e, transition) {
 }
 
 function defineNextPage (e, transition, functionReturn) {
-	$(e.currentTarget).addClass("page-navigation");
+	//$(e.currentTarget).addClass("page-navigation");
 	var extraData = null;
 	if ($.isNumeric(e)) {
 		var nextPage = e;
