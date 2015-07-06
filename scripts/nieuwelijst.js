@@ -12,6 +12,7 @@ var connectionToast;
 var genreJSON,
 countFirstCall,
 arrayToPush;
+var prevPage;
 var intervalIteration = 1;
 var allAttributes = [];
 setBasicAttributes ();
@@ -179,9 +180,10 @@ Array.min = function (array) {
 };
 
 function addGenresToCallInfo () {
-    $.when(removeAttributes).then(function(){    
+    $.when(removeAttributes).then(function(){ 
+        console.log("trueeee");
         if (chosen.length > 0) {
-            
+            prevPage = 3;
             var artist_hots = [];
 
             $.each(chosen, function (k, v) {
@@ -195,6 +197,7 @@ function addGenresToCallInfo () {
             makeURL();
         }
         else {
+            console.log("skippy");
             skipPersonalMusic ();
         }
     });
@@ -202,12 +205,12 @@ function addGenresToCallInfo () {
 
 function removeAttributes () {
     var indexesToRemove = [];
-    chosen = [];
-    songInfo[0] = [];
-    songInfo[1] = [];
-    rightSongs[0] = [];
-    rightSongs[1] = [];
-    playlist = [];
+    chosen              = [];
+    songInfo[0]         = [];
+    songInfo[1]         = [];
+    rightSongs[0]       = [];
+    rightSongs[1]       = [];
+    playlist            = [];
     $.each(allAttributes, function (k, v) {
         if (v.indexOf("genre") > -1 || v.indexOf("artist") > -1) {
             if (v.indexOf("genre") > -1) {
@@ -231,6 +234,7 @@ function spliceFromAttributes (indexToRemove) {
 
 function addArtistsToCallInfo () {
     $.when(removeAttributes).then(function(){
+        prevPage = 4
         if (chosen.length == 0) {
             chosen.push({"name": "Katy Perry"}, {"name": "Ed Sheeran"});
         }
@@ -245,6 +249,8 @@ function addArtistsToCallInfo () {
 
 function skipPersonalMusic () {
     if (chosen.length == 0) {
+        console.log("skipped");
+        prevPage = 2;
         intervalIteration = 1;
         chosen.push("pop", "genre");
         allAttributes.push("type=genre-radio", "genre=pop", "genre=house");
@@ -304,6 +310,7 @@ function getPlaylist (callURL) {
 }
 
 function pushOutputToSongsArray (output) {
+    output.response.songs.length = 0;
     if (output.response.songs.length > 0) {
         if (localStorage.trainingType == "intervaltraining") {
             if (intervalIteration === 1) {
@@ -362,7 +369,11 @@ function pushOutputToSongsArray (output) {
         }
     }
     else {
-        console.error("Geen liedjes gevonden");
+        console.log(prevPage);
+        $.when(getNextPage(prevPage, "slide", "")).then(function(){
+            toast("Er zijn geen (geschikte) liedjes gevonden. Probeer het nog een keer of baseer je muziek op iets anders.", 7000);
+            removeAttributes();
+        });
     }   
 }
 

@@ -9,6 +9,7 @@ var currentOffset = 0;
 
 function initPlaylist () {
 	$.when(login()).then(function () {
+        prevPage = 6;
 		getUsersPlaylists (0);
 		$('.wrapper').on("click", "#playlists input[name='playlist']", function () {
 			chosenPlaylist = [$(this).attr("id"), $(this).attr("data-owner")];
