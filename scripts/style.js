@@ -82,11 +82,9 @@ function launchTransition (pageContent, transition) {
 							}, 600, function () {
 								$secondWhiteContainer.find("input[type='text']").first().focus();
 								launchOnResize ();
+                                $(".wrapper").css("overflow", "initial");
 							});
 							$firstWhiteContainer.remove();
-                            setTimeout(function(){
-                                $(".wrapper").css("overflow", "initial");
-                            }, 1000);
 
             });
 		}
