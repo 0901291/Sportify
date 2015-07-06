@@ -3,8 +3,6 @@ songInfo[0]         = [];
 songInfo[1]         = [];
 var listItems       = [];
 var rightSongs      = [];
-// rightSongs[0]       = [];
-// rightSongs[1]       = [];
 var playlist        = [];
 
 var loading         = false;
@@ -207,12 +205,12 @@ function addGenresToCallInfo () {
 function removeAttributes () {
     console.log("remove");
     var indexesToRemove = [];
-    chosen              = [];
-    songInfo[0]         = [];
-    songInfo[1]         = [];
-    rightSongs[0]       = [];
-    rightSongs[1]       = [];
-    playlist            = [];
+    chosen = [];
+    songInfo[0] = [];
+    songInfo[1] = [];
+    rightSongs[0] = [];
+    rightSongs[1] = [];
+    playlist = [];
     $.each(allAttributes, function (k, v) {
         if (v.indexOf("genre") > -1 || v.indexOf("artist") > -1) {
             if (v.indexOf("genre") > -1) {
@@ -312,7 +310,6 @@ function getPlaylist (callURL) {
 }
 
 function pushOutputToSongsArray (output) {
-    output.response.songs.length = 0;
     if (output.response.songs.length > 0) {
         if (localStorage.trainingType == "intervaltraining") {
             if (intervalIteration === 1) {
@@ -371,9 +368,7 @@ function pushOutputToSongsArray (output) {
         }
     }
     else {
-        removeAttributes();
-        getNextPage(2, "slide", "");
-        toast("Er zijn geen (geschikte) liedjes gevonden. Probeer het nog een keer of baseer je muziek op iets anders.", 7000);
+        notEnoughSongs(2, "slide");
     }   
 }
 
@@ -497,14 +492,22 @@ function generatePlaylist () {
             }
         });
     };
-
-    localStorage.rightSongs = JSON.stringify(rightSongs);
-    localStorage.playlist   = JSON.stringify(playlist);
-    setTimeout(function () {
+    if (playtime < duration - margin) {
+        notEnoughSongs(2, "slide");
+    }
+    else {
+        localStorage.rightSongs = JSON.stringify(rightSongs);
+        localStorage.playlist   = JSON.stringify(playlist);
         nextPage(13, "slide");
-    }, 0);
+    }
 }
 
 function pushToPlaylist (indexInArray, indexToUse, key) {
     playlist.push([rightSongs[indexToUse][indexInArray], indexInArray, key])
+}
+
+function notEnoughSongs(page, effect) {
+    removeAttributes();
+    nextPage(page, effect);
+    toast("Er zijn niet voldoende liedjes gevonden. Probeer het nog een keer of baseer je muziek op iets anders.", 7000);
 }
