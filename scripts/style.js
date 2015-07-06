@@ -84,8 +84,11 @@ function launchTransition (pageContent, transition) {
 								launchOnResize ();
 							});
 							$firstWhiteContainer.remove();
-							$(".wrapper").css("overflow", "initial");
-				});
+                            setTimeout(function(){
+                                $(".wrapper").css("overflow", "initial");
+                            }, 1000);
+
+            });
 		}
 		else {
 			$(".wrapper").append(pageContent);
