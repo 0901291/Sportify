@@ -1,7 +1,7 @@
 {
-	"results": {
-		"genrematches":	{
-			"genre": [
+"results": {
+	"genrematches": {
+		"genre": [
 				{
 					"name": "rock",
 					"artist_hot": 0.7
@@ -45,7 +45,83 @@
 				{
 					"name": "folk",
 					"artist_hot": 0.5
-				}
+				},
+				{
+					"name": "dubstep",
+					"artist_hot": 0.5
+				},
+				{
+					"name": "ambient",
+					"artist_hot": 0.3
+				},
+				{
+					"name": "bounce",
+					"artist_hot": 0.3
+				},
+				{
+					"name": "chillstep",
+					"artist_hot": 0.3
+				},
+				{
+					"name": "bounce",
+					"artist_hot": 0.5
+				},
+				{
+					"name": "disco",
+					"artist_hot": 0.5
+				},
+				{
+					"name": "dub",
+					"artist_hot": 0.5
+				},
+				{
+					"name": "funk",
+					"artist_hot": 0.5
+				},
+				{
+					"name": "hardstyle",
+					"artist_hot": 0.5
+				},
+				{
+					"name": "hardcore",
+					"artist_hot": 0.5
+				},
+				{
+					"name": "hip pop",
+					"artist_hot": 0.5
+				},
+				{
+					"name": "mambo",
+					"artist_hot": 0.3
+				},
+				{
+					"name": "punk",
+					"artist_hot": 0.3
+				},
+				{
+					"name": "rap",
+					"artist_hot": 0.5
+				},
+				{
+					"name": "remix",
+					"artist_hot": 0.4
+				},
+				{
+					"name": "techno",
+					"artist_hot": 0.4
+				},
+				{
+					"name": "trance",
+					"artist_hot": 0.4
+				},
+				{
+					"name": "trapstep",
+					"artist_hot": 0.3
+				},
+				{
+					"name": "workout",
+					"artist_hot": 0.4
+				},
 			]
 		}
 	}
