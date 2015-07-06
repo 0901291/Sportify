@@ -463,7 +463,6 @@ function generatePlaylist () {
                     }
                     else if (playtime + rightSongs[1][i][3] >= v[1] + margin)
                         break;
-                    console.log("1: " + playtime);
                 }
             }
             else {
@@ -475,7 +474,6 @@ function generatePlaylist () {
                     }
                     else if (playtime + rightSongs[0][i][3] >= v[1] + margin)
                         break;
-                    console.log("2: " + playtime);
                 }
             }
         });
