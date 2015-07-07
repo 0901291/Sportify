@@ -8,12 +8,12 @@ songInfo[1] = [];
 var loading         = false;
 var connectionToast;
 var genreJSON,
-countFirstCall,
 arrayToPush;
 var playtime = 0;
 var prevPage;
 var intervalIteration = 1;
 var allAttributes = [];
+var retrySearchCount = 0;
 setBasicAttributes ();
 
 function setBasicAttributes () {
@@ -193,7 +193,7 @@ function addGenresToCallInfo () {
             var artist_hotttnesss = "artist_min_hotttnesss=" + Array.min(artist_hots); 
 
             allAttributes.push("type=genre-radio", artist_hotttnesss);
-            makeURL(0);
+            makeURL();
         }
         else {
             //skipPersonalMusic ();
@@ -242,7 +242,7 @@ function addArtistsToCallInfo () {
             allAttributes.push("artist=" + v.name.replace("&", "%26"));
         });
         allAttributes.push("type=artist-radio");
-        makeURL(0);
+        makeURL();
         return true;
     });
 }
@@ -253,7 +253,7 @@ function skipPersonalMusic () {
         intervalIteration = 1;
         chosen.push("pop", "genre");
         allAttributes.push("type=genre-radio", "genre=pop", "genre=house");
-        makeURL(0);
+        makeURL();
     }
 }
 
@@ -310,66 +310,67 @@ function getPlaylist (callURL) {
 }
 
 function pushOutputToSongsArray (output) {
-
     if (output.response.songs.length > 0) {
         if (localStorage.trainingType == "intervaltraining") {
             if (intervalIteration === 1) {
                 intervalIteration = 2;
-                makeURL;
-                countFirstCall = songInfo.length;
+                makeURL();
                 $.each(output.response.songs, function (key, value) {
+                    foundTrack = false;
                     if (value.tracks.length > 0) {
-                        var foundTrack = false;
-                        var trackId;
+                        var foundId;
                         $.each(value.tracks, function (k, v) {
                             if (typeof v.foreign_id != typeof undefined && v.foreign_id != "") {
-                                trackId = value.tracks[k].foreign_id.slice(14);
                                 foundTrack = true;
+                                foundId = v.foreign_id.slice(14);
+                                return;
                             }
-                        })
-                        if (foundTrack)
-                            songInfo[1].push(trackId);
+                        })      
                     }
+                    if (foundTrack)
+                        songInfo[1].push(foundId);
                 });
             }
             else if (intervalIteration === 2) {
                 $.each(output.response.songs, function (key, value) {
+                    foundTrack = false;
                     if (value.tracks.length > 0) {
-                        var foundTrack = false;
-                        var trackId;
+                        var foundId;
                         $.each(value.tracks, function (k, v) {
                             if (typeof v.foreign_id != typeof undefined && v.foreign_id != "") {
-                                trackId = value.tracks[k].foreign_id.slice(14);
                                 foundTrack = true;
+                                foundId = v.foreign_id.slice(14);
+                                return;
                             }
                         })
-                        if (foundTrack)
-                            songInfo[0].push(trackId);
                     }
+                    if (foundTrack)
+                        songInfo[0].push(foundId);
                 });
                 findSpotifyEquivalents ();
             };
         }
         else {
             $.each(output.response.songs, function (key, value) {
+                foundTrack = false;
                 if (value.tracks.length > 0) {
-                    var foundTrack = false;
-                    var trackId;
+                    var foundId;
                     $.each(value.tracks, function (k, v) {
                         if (typeof v.foreign_id != typeof undefined && v.foreign_id != "") {
-                            trackId = value.tracks[k].foreign_id.slice(14);
                             foundTrack = true;
+                            foundId = v.foreign_id.slice(14);
+                            return;
                         }
-                    })
-                    if (foundTrack)
-                        songInfo[0].push(trackId);
+                    })      
                 }
+                if (foundTrack)
+                    songInfo[0].push(foundId);
             });
             findSpotifyEquivalents ();
         }
     }
     else {
-        notEnoughSongs(2, "slide");
+        searchForMoreSongs(2, "slide");
     }
 }
 
@@ -409,17 +410,17 @@ function findSpotifyEquivalents () {
     if (songInfo[0].length > 50) {
         rightSongs[0] = [];
         getSeveralTracks(songInfo[0].slice(0, 50).join(","), rightSongs[0])        
-    if (localStorage.trainingType == "intervaltraining")
+        if (localStorage.trainingType == "intervaltraining")
            getSeveralTracks(songInfo[0].slice(51, songInfo[0].length).join(","), rightSongs[0]);
         else 
-            getSeveralTracks(songInfo[0].slice(51, songInfo[0].length).join(","), rightSongs[0]).done(function(){generatePlaylist();});
+            getSeveralTracks(songInfo[0].slice(51, songInfo[0].length).join(","), rightSongs[0]).done(generatePlaylist);
         setProgressBar (1, 10);
     }
     else {
         if (localStorage.trainingType == "intervaltraining")
             getSeveralTracks(songInfo[0].join(","), rightSongs[0]);
-        else(localStorage.trainingType == "intervaltraining")
-            getSeveralTracks(songInfo[0].join(","), rightSongs[0]).done(function(){generatePlaylist();});
+        else
+            getSeveralTracks(songInfo[0].join(","), rightSongs[0]).done(generatePlaylist);
         setProgressBar (1, 10);
     }
 
@@ -428,10 +429,10 @@ function findSpotifyEquivalents () {
         if (songInfo[1].length > 50) {
             getSeveralTracks(songInfo[1].slice(0, 50).join(","), rightSongs[1]); 
             
-            getSeveralTracks(songInfo[1].slice(51, songInfo[0].length).join(","), rightSongs[1]).done(function(){generatePlaylist();});
+            getSeveralTracks(songInfo[1].slice(51, songInfo[0].length).join(","), rightSongs[1]).done(generatePlaylist);
         }
         else
-            getSeveralTracks(songInfo[1].join(","), rightSongs[1]).done(function(){generatePlaylist();});
+            getSeveralTracks(songInfo[1].join(","), rightSongs[1]).done(generatePlaylist);
         
         setProgressBar (1, 20);
     }
@@ -439,18 +440,9 @@ function findSpotifyEquivalents () {
 
 function checkIfUsed (id)
 {
-    console.log(songInfo[0].length);
-    console.log(used);
     if (used.indexOf(id) == -1)
-    {
-        console.log(id + " -  - - - - not used");
         return true;
-    }
-    else
-    {
-        console.log(id + " - - - - - - - used");
-        return false;
-    }
+    return false;
 }
 
 function setProgressBar (times, count) {
@@ -499,7 +491,6 @@ function generatePlaylist () {
     }
     else {
         $.each(rightSongs[0], function (k, v) {
-            //console.log(playtime + " + " + v[3] + " < " + duration + " + " + margin + "  CAN USE: " + checkIfUsed(v[0]));
             if (playtime + v[3] < duration + margin && checkIfUsed(v[0])) {
                 playlist.push([v, k, 0]);
                 used.push(v[0]);
@@ -513,7 +504,7 @@ function generatePlaylist () {
         });
     };
     if (playtime < duration - margin) {
-        notEnoughSongs(2, "slide");
+        searchForMoreSongs(2, "slide");
     }
     else {
         localStorage.rightSongs = JSON.stringify(rightSongs);
@@ -528,11 +519,20 @@ function pushToPlaylist (indexInArray, indexToUse, key) {
     playlist.push([rightSongs[indexToUse][indexInArray], indexInArray, key])
 }
 
-function notEnoughSongs(page, effect) {
+function searchForMoreSongs(page, effect) {
     songInfo[0] = [];
     songInfo[1] = [];
+    intervalIteration = 1;
     makeURL();
-    //removeAttributes();
-    //nextPage(page, effect);
-    //toast("Er zijn niet voldoende liedjes gevonden. Probeer het nog een keer of baseer je muziek op iets anders.", 7000);
+    retrySearchCount++;
+    if (retrySearchCount > 10) {
+        retrySearchCount = 0;
+        notEnoughSongs(page, effect);
+    }
+}
+
+function notEnoughSongs(page, effect) {
+    removeAttributes();
+    nextPage(page, effect);
+    toast("Er zijn niet voldoende liedjes gevonden. Probeer het nog een keer of baseer je muziek op iets anders.", 7000);
 }
