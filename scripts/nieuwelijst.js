@@ -1,15 +1,16 @@
 var songInfo        = [];
-songInfo[0]         = [];
-songInfo[1]         = [];
 var listItems       = [];
 var rightSongs      = [];
 var playlist        = [];
-
+var used            = [];
+songInfo[0] = [];
+songInfo[1] = [];
 var loading         = false;
 var connectionToast;
 var genreJSON,
 countFirstCall,
 arrayToPush;
+var playtime = 0;
 var prevPage;
 var intervalIteration = 1;
 var allAttributes = [];
@@ -23,7 +24,8 @@ function setBasicAttributes () {
         "results=100",
         "bucket=tracks",
         "bucket=id:spotify",
-        "song_type=studio"
+        "song_type=studio",
+        "limited_interactivity=false"
     ];
 }
 
@@ -47,7 +49,7 @@ function validateDurAndBpm () {
             }
         });
         if (localStorage.trainingType == "standaardtraining") {
-           allAttributes.push("min_tempo=" + (parseInt(localStorage.bpm) - 3), "max_tempo=" + (parseInt(localStorage.bpm) + 3), "min_energy=0.7");
+           allAttributes.push("min_tempo=" + (parseInt(localStorage.bpm) - 3), "max_tempo=" + (parseInt(localStorage.bpm) + 3), "min_energy=0.3");
         }
         return true;
     }
@@ -179,7 +181,6 @@ Array.min = function (array) {
 
 function addGenresToCallInfo () {
     $.when(removeAttributes).then(function(){ 
-        console.log("trueeee");
         if (chosen.length > 0) {
             prevPage = 3;
             var artist_hots = [];
@@ -192,24 +193,24 @@ function addGenresToCallInfo () {
             var artist_hotttnesss = "artist_min_hotttnesss=" + Array.min(artist_hots); 
 
             allAttributes.push("type=genre-radio", artist_hotttnesss);
-            makeURL();
+            makeURL(0);
         }
         else {
-            console.log("No genres chosen");
             //skipPersonalMusic ();
         }
     });
 }
 
 function removeAttributes () {
-    console.log("remove");
     var indexesToRemove = [];
     chosen = [];
     songInfo[0] = [];
     songInfo[1] = [];
     rightSongs[0] = [];
     rightSongs[1] = [];
+    used = [];
     playlist = [];
+    playtime = 0;
     $.each(allAttributes, function (k, v) {
         if (v.indexOf("genre") > -1 || v.indexOf("artist") > -1) {
             if (v.indexOf("genre") > -1) {
@@ -241,25 +242,25 @@ function addArtistsToCallInfo () {
             allAttributes.push("artist=" + v.name.replace("&", "%26"));
         });
         allAttributes.push("type=artist-radio");
-        makeURL();
+        makeURL(0);
         return true;
     });
 }
 
 function skipPersonalMusic () {
     if (chosen.length == 0) {
-        console.log("skipped");
         prevPage = 2;
         intervalIteration = 1;
         chosen.push("pop", "genre");
         allAttributes.push("type=genre-radio", "genre=pop", "genre=house");
-        makeURL();
+        makeURL(0);
     }
 }
 
 function makeURL () {
     var base = "http://developer.echonest.com/api/v4/playlist/static?";
     var url = base + allAttributes.join("&");
+    console.log(url);
     if (localStorage.trainingType == "intervaltraining") {
         if (intervalIteration === 1) {
             if (parseInt(localStorage.bpmTwo >= 100)) {
@@ -309,11 +310,12 @@ function getPlaylist (callURL) {
 }
 
 function pushOutputToSongsArray (output) {
+
     if (output.response.songs.length > 0) {
         if (localStorage.trainingType == "intervaltraining") {
             if (intervalIteration === 1) {
                 intervalIteration = 2;
-                makeURL ();
+                makeURL;
                 countFirstCall = songInfo.length;
                 $.each(output.response.songs, function (key, value) {
                     if (value.tracks.length > 0) {
@@ -368,7 +370,7 @@ function pushOutputToSongsArray (output) {
     }
     else {
         notEnoughSongs(2, "slide");
-    }   
+    }
 }
 
 function getSeveralTracks (ids, arrayToUse) {
@@ -384,50 +386,70 @@ function getSeveralTracks (ids, arrayToUse) {
 }
 
 function validateSpotifySongs (songs, arrayToUse) {
-    var validatedSongs = [];
     $.each(songs.tracks, function () {
         if (this.is_playable && this.album.images.length == 3) {
             var artistnames = [];
+            
             $.each(this.artists, function (k, v) {
                 artistnames.push(v.name);
-            })
+            });
+            
             arrayToUse.push([this.id, artistnames.join(", "), this.name, this.duration_ms, this.preview_url, this.album.images[2].url]);
         };
+        
         if (localStorage.trainingType == "intervaltraining")
             setProgressBar (0.5, rightSongs[0].length + rightSongs[1].length);
         else
             setProgressBar (1, rightSongs[0].length);
-    })
+    });
 }
 
 function findSpotifyEquivalents () {
     connectionToast = setTimeout(function () {toast("Je internet snelheid is niet optimaal, het kan iets langer duren dan normaal.", 60000)}, 8000);
-    rightSongs[0] = [];
     if (songInfo[0].length > 50) {
-        getSeveralTracks(songInfo[0].slice(0, 50).join(","), rightSongs[0]);
-        if (localStorage.trainingType == "intervaltraining")
-            getSeveralTracks(songInfo[0].slice(51, songInfo[0].length).join(","), rightSongs[0]);
-        else
-            $.when(getSeveralTracks(songInfo[0].slice(51, songInfo[0].length).join(","), rightSongs[0])).then(generatePlaylist);
+        rightSongs[0] = [];
+        getSeveralTracks(songInfo[0].slice(0, 50).join(","), rightSongs[0])        
+    if (localStorage.trainingType == "intervaltraining")
+           getSeveralTracks(songInfo[0].slice(51, songInfo[0].length).join(","), rightSongs[0]);
+        else 
+            getSeveralTracks(songInfo[0].slice(51, songInfo[0].length).join(","), rightSongs[0]).done(function(){generatePlaylist();});
         setProgressBar (1, 10);
     }
     else {
         if (localStorage.trainingType == "intervaltraining")
             getSeveralTracks(songInfo[0].join(","), rightSongs[0]);
-        else (localStorage.trainingType == "intervaltraining")
-            $.when(getSeveralTracks(songInfo[0].join(","), rightSongs[0])).then(generatePlaylist);
+        else(localStorage.trainingType == "intervaltraining")
+            getSeveralTracks(songInfo[0].join(","), rightSongs[0]).done(function(){generatePlaylist();});
         setProgressBar (1, 10);
     }
 
     if (localStorage.trainingType == "intervaltraining") {
         rightSongs[1] = [];
         if (songInfo[1].length > 50) {
-            getSeveralTracks(songInfo[1].slice(0, 50).join(","), rightSongs[1]);
-            $.when(getSeveralTracks(songInfo[1].slice(51, songInfo[0].length).join(","), rightSongs[1])).then(generatePlaylist);
+            getSeveralTracks(songInfo[1].slice(0, 50).join(","), rightSongs[1]); 
+            
+            getSeveralTracks(songInfo[1].slice(51, songInfo[0].length).join(","), rightSongs[1]).done(function(){generatePlaylist();});
         }
         else
-            $.when(getSeveralTracks(songInfo[1].join(","), rightSongs[1])).then(generatePlaylist);
+            getSeveralTracks(songInfo[1].join(","), rightSongs[1]).done(function(){generatePlaylist();});
+        
         setProgressBar (1, 20);
+    }
+}
+
+function checkIfUsed (id)
+{
+    console.log(songInfo[0].length);
+    console.log(used);
+    if (used.indexOf(id) == -1)
+    {
+        console.log(id + " -  - - - - not used");
+        return true;
+    }
+    else
+    {
+        console.log(id + " - - - - - - - used");
+        return false;
     }
 }
 
@@ -444,15 +466,13 @@ function generatePlaylist () {
     clearTimeout(connectionToast);
     $(".toast").remove();
     $("#loading-playlist-bar .determinate").css("width", "100%");
-    var playtime = 0;
-    var margin = 60000;
+    var margin = 180000;
     var duration = parseInt(localStorage.duration);
     if (localStorage.trainingType == "intervaltraining") {
         var intervalScheme = JSON.parse(localStorage.intervalScheme);
         var chosenIndexesOne = [];
         var chosenIndexesTwo = [];
         $.each(intervalScheme, function (k, v) {
-            playtime = 0;
             if (v[0] == 2) {
                 for (var i = 0; i < rightSongs[1].length - 1; i++) {
                     if (playtime + rightSongs[1][i][3] < v[1] + margin && chosenIndexesOne.indexOf(i) == -1) {
@@ -479,9 +499,12 @@ function generatePlaylist () {
     }
     else {
         $.each(rightSongs[0], function (k, v) {
-            if (playtime + v[3] < duration + margin) {
+            //console.log(playtime + " + " + v[3] + " < " + duration + " + " + margin + "  CAN USE: " + checkIfUsed(v[0]));
+            if (playtime + v[3] < duration + margin && checkIfUsed(v[0])) {
                 playlist.push([v, k, 0]);
+                used.push(v[0]);
                 playtime += v[3];
+
             }
             else if (playtime + v[3] >= duration + margin)
             {
@@ -499,12 +522,17 @@ function generatePlaylist () {
     }
 }
 
+
 function pushToPlaylist (indexInArray, indexToUse, key) {
+
     playlist.push([rightSongs[indexToUse][indexInArray], indexInArray, key])
 }
 
 function notEnoughSongs(page, effect) {
-    removeAttributes();
-    nextPage(page, effect);
-    toast("Er zijn niet voldoende liedjes gevonden. Probeer het nog een keer of baseer je muziek op iets anders.", 7000);
+    songInfo[0] = [];
+    songInfo[1] = [];
+    makeURL();
+    //removeAttributes();
+    //nextPage(page, effect);
+    //toast("Er zijn niet voldoende liedjes gevonden. Probeer het nog een keer of baseer je muziek op iets anders.", 7000);
 }
