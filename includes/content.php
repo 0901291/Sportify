@@ -382,7 +382,7 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 	            $data   = getProfilePlaylists($conn);
 	            
 	            while ($row = $data -> fetch_assoc()) {
-	                echo '<tr data-page="16" data-transition="slide" data-item="'. $row["idPlaylists"] .'" class="page-navigation border-bottom"> <td><img src="'. $row["image"] . '"></td><td>'. $row["name"] . '</td> <td> '. $row["BPM"] . '</td></tr>';
+	                echo '<tr data-page="16" data-transition="slide" data-item="'. $row["idPlaylists"] .'" class="page-navigation border-bottom"> <td><img src="'. $row["image"] . '"></td><td>'. $row["name"] . '</td> <td class="center"> '. $row["BPM"] . '</td></tr>';
 	            }
 
 	            if ($data->num_rows == 0)

@@ -64,7 +64,7 @@ function printResults (data) {
             .append($("<td>"))
             .append($("<td>", {text: "Er zijn geen resultaten gevonden."}));
         $("#searchResults")
-            .prepend($tr);
+            .append($tr);
     }
     launchOnResize();
 }
