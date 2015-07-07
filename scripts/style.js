@@ -82,10 +82,11 @@ function launchTransition (pageContent, transition) {
 							}, 600, function () {
 								$secondWhiteContainer.find("input[type='text']").first().focus();
 								launchOnResize ();
+                                $(".wrapper").css("overflow", "initial");
 							});
 							$firstWhiteContainer.remove();
-							$(".wrapper").css("overflow", "initial");
-				});
+
+            });
 		}
 		else {
 			$(".wrapper").append(pageContent);
@@ -95,7 +96,8 @@ function launchTransition (pageContent, transition) {
 					top: 		0,
 					position: 	"absolute",
 					zIndex: 	9999,
-					width: 		"100%"
+					width: 		"100%",
+					height: 	$(window).height()
 				})
 				.transition({
 					right: 		0,
@@ -104,6 +106,7 @@ function launchTransition (pageContent, transition) {
 					$firstWhiteContainer.remove();
 					$(".white-container").find("input[type='text']").first().focus();
 					launchOnResize ();
+					$(".white-container").css("height", "initial");
 				});
 		}
 	}

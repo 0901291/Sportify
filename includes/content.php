@@ -382,7 +382,7 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 	            $data   = getProfilePlaylists($conn);
 	            
 	            while ($row = $data -> fetch_assoc()) {
-	                echo '<tr data-page="16" data-transition="slide" data-item="'. $row["idPlaylists"] .'" class="page-navigation border-bottom"> <td><img src="'. $row["image"] . '"></td><td>'. $row["name"] . '</td> <td class="center"> '. $row["BPM"] . '</td></tr>';
+	                echo '<tr data-page="16" data-transition="slide" data-item="'. $row["idPlaylists"] .'" class="page-navigation border-bottom playlist"> <td style="width: 74px" class="albumart"><img src="'. $row["image"] . '"></td><td style="width: 74px; display: none;" class="delete_td"><input type="checkbox" id="' . $row["idPlaylists"] . '" value="' . $row["idPlaylists"] . '"><label for="' . $row["idPlaylists"] . '"></td><td>'. $row["name"] . '</td> <td class="center"> '. $row["BPM"] . '</td></tr>';
 	            }
 
 	            if ($data->num_rows == 0)
@@ -419,6 +419,31 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 	                      </table>
 	               </div>
 	           </div>
+	           <script>
+	           var toggling = false;
+	           	function toggleDelete() {
+	           		if (!toggling) {
+		           		toggling = true;
+		           		$.each($(".playlist"), function (k, v) {
+		           			var playlist = $(v);
+		           			var albumart = playlist.find(".albumart");
+		           			var delete_td = playlist.find(".delete_td");
+		           			if ($(albumart).css("display") == "none") {
+			           			delete_td.fadeToggle("fast", function () {
+			           				albumart.fadeToggle("fast");
+			           				toggling = false;
+			           			});
+		           			}
+		           			else {
+		           				albumart.fadeToggle("fast", function () {
+			           				delete_td.fadeToggle("fast");
+			           				toggling = false;
+			           			});
+							}
+		           		})
+					}
+	           	}
+	           </script>
 	         </div>';
 	    	break;
 		case 16:
