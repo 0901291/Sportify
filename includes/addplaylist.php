@@ -53,9 +53,9 @@
 			if ($conn -> query($searchSongQuery) -> num_rows == 0)
 			{
 				$addSongsQuery = 
-					"INSERT INTO " . DB_PREFIX . "songs (idSongs)
-					VALUES ('" . htmlentities($song[0][0]) . "')";
-				$conn -> query ($addSongsQuery);
+                        "INSERT INTO " . DB_PREFIX . "songs (idSongs)
+                        VALUES ('" . htmlentities($song[0][0]) . "')";
+                    $conn -> query ($addSongsQuery);
 			}
 			$addSongsToSchemesQuery =
 				"INSERT INTO " . DB_PREFIX . "schemes_has_songs (schemes_idSchemes, songs_idSongs, `order`)
