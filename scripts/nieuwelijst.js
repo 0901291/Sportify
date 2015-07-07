@@ -54,7 +54,6 @@ function validateDurAndBpm () {
 }
 
 function validateIntervalTraining () {
-    // Validation
     if (true) {
        localStorage.intervalScheme = JSON.stringify(scheme);
        localStorage.bpmOne = $("#bpmOne").val();
@@ -72,7 +71,7 @@ function getItems (searchType, getDisplayText, e) {
         $.ajax({
             data: {
                 searchType: searchType,
-                query:      $('.searchItems').val()
+                query:      $('.searchItems').val().toLowerCase()
             },
             method:     "post",
             url:        "includes/searchitems.php",
