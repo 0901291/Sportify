@@ -15,14 +15,14 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 						<h3 class="intro-subtitle">Kies hieronder uit wat voor muziek je lijst moet bestaan.</h3>
 						<div class="row content-container">
 							<ul class="row list-menu">
-								<li data-page="3" data-transition="slide" class="choose-personalized-button border-bottom page-navigation col s12 center">
-									Genre
+								<li data-page="3" data-transition="slide" class="choose-personalized-button waves-effect waves-green border-bottom page-navigation col s12 center">
+									Genres
 								</li>
-								<li data-page="4" data-transition="slide" class="choose-personalized-button border-bottom page-navigation col s12 center">
-									Artiest
+								<li data-page="4" data-transition="slide" class="choose-personalized-button waves-effect waves-green border-bottom page-navigation col s12 center">
+									Artiesten
 								</li>
-								<li data-page="'  . (isLoggedIn() ? 6 : 12) . '" data-transition="slide" class="choose-personalized-button border-bottom page-navigation col s12 center">
-									Afspeellijst
+								<li data-page="'  . (isLoggedIn() ? 6 : 12) . '" data-transition="slide" class="choose-personalized-button waves-effect waves-green border-bottom page-navigation col s12 center">
+									Eigen afspeellijst
 								</li>
 							</ul>
 							<div class="right page-navigation next-button-container" data-transition="slide" data-page="7">
@@ -382,7 +382,8 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 	            $data   = getProfilePlaylists($conn);
 	            
 	            while ($row = $data -> fetch_assoc()) {
-	                echo '<tr data-page="16" data-transition="slide" data-item="'. $row["idPlaylists"] .'" class="page-navigation border-bottom playlist"> <td style="width: 74px" class="albumart"><img src="'. $row["image"] . '"></td><td style="width: 74px; display: none;" class="delete_td"><input type="checkbox" id="playlist_' . $row["idPlaylists"] . '" value="' . $row["idPlaylists"] . '"><label for="playlist_' . $row["idPlaylists"] . '"></td><td>'. $row["name"] . '</td> <td class="center"> '. $row["BPM"] . '</td></tr>';
+	            	$name = truncateText($row["name"]);
+	                echo '<tr data-page="16" data-transition="slide" data-item="'. $row["idPlaylists"] .'" class="page-navigation border-bottom playlist"> <td style="width: 74px; height: 100px;" class="albumart"><img src="'. $row["image"] . '"></td><td style="width: 74px; height: 100px; display: none;" class="delete_td"><input type="checkbox" id="playlist_' . $row["idPlaylists"] . '" value="' . $row["idPlaylists"] . '"><label for="playlist_' . $row["idPlaylists"] . '"></td><td class="tooltipped" data-position="top" data-delay="0" data-tooltip="' . $row["name"] . '">'. $name . '</td> <td class="center"> '. $row["BPM"] . '</td></tr>';
 	            }
 
 	            if ($data->num_rows == 0)
@@ -472,6 +473,7 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 					$(".confirm").on("click", deleteLists);
 					$(".delete_container").on("click", ".select_all", toggleSelectAll);
 					$(".delete_container").on("click", ".cancel_delete", toggleDelete);
+					$(".tooltipped").tooltip({delay: 0});
 	           	});
 
 				function toggleSelectAll () {
@@ -605,10 +607,6 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 		                    <h4>Afspeellijst</h4>
 		                    <ul id="songs" class="center col s12 m12 l12">
 		                  </ul>
-		                </div>
-		                <div class="center">
-		                    <h4>Omschrijving</h4>
-		                    <p>'; echo ($infoPlaylist["description"] != "") ? $infoPlaylist["description"] : "Er is geen omschrijving voor deze afspeellijst gevonden."; echo '</p>
 		                </div>
                         <div class="right page-navigation next-button-container" data-transition="slide" data-function="duplicatePlaylist" data-page="11">
                             <p class="waves-effect waves-orange btn-flat next-button"> 
@@ -763,10 +761,6 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 	                                <div class="input-field col s10 m10 l8 offset-m1 offset-s1 offset-l2 form-field">
 	                                    <textarea class="validate center materialize-textarea" autofocus id="playlistName" />
 	                                    <label for="playlistName">Naam van de lijst</label>
-	                                </div>
-	                                <div class="input-field col s10 m10 l8 offset-m1 offset-s1 offset-l2 form-field">
-	                                    <textarea class="validate center materialize-textarea" id="playlistDescription" />
-	                                    <label for="playlistDescription">Omschrijving van de lijst</label>
 	                                </div>
 	                           </form>
 	                        </div>

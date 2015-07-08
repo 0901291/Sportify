@@ -53,11 +53,12 @@ function printResults (data) {
             $tr = $("<tr>", {"data-page":"16", "data-item": v.id, "data-transition":"slide", class: "list-menu-button page-navigation border-bottom"})
                 .append($("<td>")
                     .append("<img src='"+v.image+"'>"))
-                .append($("<td>", {text: v.name}))
+                .append($("<td>", {text: truncateText(v.name), class: "tooltipped", "data-position": "top", "data-delay": "0", "data-tooltip": v.name}))
                 .append($("<td>", {text: v.bpm}));
             $("#searchResults")
                 .append($tr);
         });
+        $(".tooltipped").tooltip({delay: 0});
     }
     else {
         $tr = $("<tr>")

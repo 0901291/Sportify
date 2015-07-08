@@ -5579,7 +5579,9 @@ small {
       -webkit-border-radius: 0px;
       -moz-border-radius: 0px;
       border-radius: 0px;
-      background-clip: padding-box; } }
+      background-clip: padding-box;
+      line-height: 20px;
+      height: 60px; } }
   @media only screen and (min-width : 601px) and (max-width : 992px) {
     .toast {
       float: left; } }

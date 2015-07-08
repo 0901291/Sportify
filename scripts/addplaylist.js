@@ -179,7 +179,7 @@ function addPlaylistToDatabase () {
             scheme: scheme,
             playlist: JSON.parse(localStorage.playlist),
             name: $("#playlistName").val(),
-            description: $("#playlistDescription").val(),
+            description: " ",
             trainingType: localStorage.trainingType,
             bpm: localStorage.bpm,
             image: localStorage.playlistImage
