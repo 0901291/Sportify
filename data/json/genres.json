@@ -3,10 +3,6 @@
 		"genrematches":	{
 			"genre": [
 				{
-					"name": "Rock",
-					"artist_hot": 0.7
-				},
-				{
 					"name": "Pop",
 					"artist_hot": 0.8
 				},
@@ -15,24 +11,12 @@
 					"artist_hot": 0.7
 				},
 				{
-					"name": "Acid house",
-					"artist_hot": 0.5
+					"name": "Rock",
+					"artist_hot": 0.7
 				},
 				{
 					"name": "Country",
 					"artist_hot": 0.5
-				},
-				{
-					"name": "Jazz",
-					"artist_hot": 0.5
-				},
-				{
-					"name": "Lounge",
-					"artist_hot": 0.5
-				},
-				{
-					"name": "Reggae",
-					"artist_hot": 0.6
 				},
 				{
 					"name": "Samba",
@@ -43,19 +27,11 @@
 					"artist_hot": 0.5
 				},
 				{
-					"name": "Folk",
-					"artist_hot": 0.5
-				},
-				{
 					"name": "Dubstep",
 					"artist_hot": 0.5
 				},
 				{
 					"name": "Ambient",
-					"artist_hot": 0.3
-				},
-				{
-					"name": "Bounce",
 					"artist_hot": 0.3
 				},
 				{
@@ -71,19 +47,7 @@
 					"artist_hot": 0.5
 				},
 				{
-					"name": "Dub",
-					"artist_hot": 0.5
-				},
-				{
 					"name": "Funk",
-					"artist_hot": 0.5
-				},
-				{
-					"name": "Hardstyle",
-					"artist_hot": 0.5
-				},
-				{
-					"name": "Hardcore",
 					"artist_hot": 0.5
 				},
 				{
@@ -91,32 +55,12 @@
 					"artist_hot": 0.5
 				},
 				{
-					"name": "Mambo",
-					"artist_hot": 0.3
-				},
-				{
-					"name": "Punk",
-					"artist_hot": 0.3
-				},
-				{
 					"name": "Rap",
 					"artist_hot": 0.5
 				},
 				{
-					"name": "Remix",
-					"artist_hot": 0.4
-				},
-				{
 					"name": "Techno",
 					"artist_hot": 0.4
-				},
-				{
-					"name": "Trance",
-					"artist_hot": 0.4
-				},
-				{
-					"name": "Trapstep",
-					"artist_hot": 0.3
 				},
 				{
 					"name": "Workout",
