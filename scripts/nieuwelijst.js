@@ -186,7 +186,7 @@ function addGenresToCallInfo () {
             var artist_hots = [];
 
             $.each(chosen, function (k, v) {
-                allAttributes.push("genre=" + v.name);
+                allAttributes.push("genre=" + (v.name).toLowerCase());
                 artist_hots.push(v.artist_hot);
             });
 
@@ -374,38 +374,6 @@ function pushOutputToSongsArray (output) {
     }
 }
 
-function getSeveralTracks (ids, arrayToUse) {
-    console.log(ids);
-    var spotifyAPIBase = "https://api.spotify.com/v1/tracks/?market=NL&ids=";
-    var output;
-    return $.ajax({
-        url: spotifyAPIBase + ids,
-        dataType: "json",
-        success: function (output) {
-            validateSpotifySongs(output, arrayToUse);
-        }
-    })
-}
-
-function validateSpotifySongs (songs, arrayToUse) {
-    $.each(songs.tracks, function () {
-        if (this.is_playable && this.album.images.length == 3) {
-            var artistnames = [];
-            
-            $.each(this.artists, function (k, v) {
-                artistnames.push(v.name);
-            });
-            
-            arrayToUse.push([this.id, artistnames.join(", "), this.name, this.duration_ms, this.preview_url, this.album.images[2].url]);
-        };
-        
-        if (localStorage.trainingType == "intervaltraining")
-            setProgressBar (0.5, rightSongs[0].length + rightSongs[1].length);
-        else
-            setProgressBar (1, rightSongs[0].length);
-    });
-}
-
 function findSpotifyEquivalents () {
     console.log(songInfo[0].length + " " + songInfo[1].length);
     connectionToast = setTimeout(function () {toast("Je internet snelheid is niet optimaal, het kan iets langer duren dan normaal.", 60000)}, 8000);
@@ -435,9 +403,39 @@ function findSpotifyEquivalents () {
         }
         else
             getSeveralTracks(songInfo[1].join(","), rightSongs[1]).done(generatePlaylist);
-        
         setProgressBar (1, 20);
     }
+}
+
+function getSeveralTracks (ids, arrayToUse) {
+    console.log(ids);
+    var spotifyAPIBase = "https://api.spotify.com/v1/tracks/?market=NL&ids=";
+    var output;
+    return $.ajax({
+        url: spotifyAPIBase + ids,
+        dataType: "json",
+        success: function (output) {
+            validateSpotifySongs(output, arrayToUse);
+        }
+    })
+}
+
+function validateSpotifySongs (songs, arrayToUse) {
+    $.each(songs.tracks, function (k, v) {
+        if (v.is_playable && v.album.images.length == 3) {
+            var artistnames = [];
+            
+            $.each(v.artists, function (k, v) {
+                artistnames.push(v.name);
+            });
+            
+            arrayToUse.push([v.id, artistnames.join(", "), v.name, v.duration_ms, v.preview_url, v.album.images[2].url]);
+        };
+        if (localStorage.trainingType == "intervaltraining")
+            setProgressBar (0.5, rightSongs[0].length + rightSongs[1].length);
+        else
+            setProgressBar (1, rightSongs[0].length);
+    });
 }
 
 function checkIfUsed (id)
@@ -504,8 +502,9 @@ function generatePlaylist () {
                 return;
             }
         });
-    };
+    }
     if (playtime < duration - margin) {
+        console.log(playtime);
         searchForMoreSongs(2, "slide");
     }
     else {

@@ -5661,7 +5661,8 @@ ul.tabs li.tab {
   -moz-border-radius: 0 0 14px 14px;
   border-radius: 0 0 14px 14px;
   background-clip: padding-box;
-  background-color: #323232;
+  /*background-color: #323232;*/
+  background-color: #009688;
   z-index: -1;
   -webkit-transform-origin: 50% 10%;
   -moz-transform-origin: 50% 10%;

@@ -50,16 +50,22 @@ function calculateCurrentScheme (e) {
 function addMinute (numberOfOne, numberOfTwo, e) {
 	var intervalItem = $(e).parent();
 	if (intervalItem.hasClass("walk")) {
-		if ((scheme[(intervalItem.index()) - 1][1] - 60000) > 240000) {
+		if ((scheme[(intervalItem.index()) - 1][1] - 60000) >= 240000) {
 			scheme[intervalItem.index()][1] += 60000;
 			scheme[(intervalItem.index()) - 1][1] -= 60000;
 		}
 		else {
-			scheme[intervalItem.index()][1] += 60000;
+			toast("Geen kleiner rengedeelte toegestaan.", 4000);
 		}
 	}
 	else {
-		scheme[intervalItem.index()][1] += 60000;
+		if ((scheme[(intervalItem.index()) + 1][1] - 60000) >= 240000) {
+			scheme[intervalItem.index()][1] += 60000;
+			scheme[(intervalItem.index()) + 1][1] -= 60000;
+		}
+		else {
+			toast("Geen kleinere interval toegestaan.", 4000);
+		}
 	}
 	printIntervalTraining ();
 }
@@ -67,7 +73,7 @@ function addMinute (numberOfOne, numberOfTwo, e) {
 function substractMinute (numberOfOne, numberOfTwo, e) {
 	var intervalItem = $(e).parent();
 	if (intervalItem.hasClass("walk")) {
-		if ((scheme[(intervalItem.index())][1] - 60000) > 240000) {
+		if ((scheme[(intervalItem.index())][1] - 60000) >= 240000) {
 			scheme[intervalItem.index()][1] -= 60000;
 			scheme[(intervalItem.index()) - 1][1] += 60000;
 		}
@@ -76,8 +82,9 @@ function substractMinute (numberOfOne, numberOfTwo, e) {
 		}
 	}
 	else {
-		if ((scheme[(intervalItem.index())][1] - 60000) > 240000) {
+		if ((scheme[(intervalItem.index())][1] - 60000) >= 240000) {
 			scheme[intervalItem.index()][1] -= 60000;
+			scheme[(intervalItem.index()) + 1][1] += 60000;
 		}
 		else {
 			toast("Geen kleiner rengedeelte toegestaan.", 4000);
@@ -88,12 +95,12 @@ function substractMinute (numberOfOne, numberOfTwo, e) {
 
 function addInterval (numberOfOne, numberOfTwo) {
 	var newDurationTwo = Math.round((duration - ((numberOfOne + 1) * 240000)) / (numberOfTwo + 1));
-	if (newDurationTwo > 180000) {
+	if (newDurationTwo > 240000) {
 		scheme = [];
 		for (var i = 0; i < numberOfOne + 1; i++) {
 			scheme.push([2, newDurationTwo], [1, 240000]);
 		};
-		if (newDurationTwo < 240000) {
+		if (newDurationTwo < 300000) {
 			$('#add-interval').hide();
 		}
 		else {

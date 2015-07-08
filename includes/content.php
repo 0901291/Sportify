@@ -488,7 +488,7 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 				}
 
 				function confirmDelete () {
-					$("#confirm_delete").openModal({dismissible:false});
+					$("#confirm_delete").openModal();
 				}
 
 				function deleteLists () {
@@ -598,7 +598,7 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 		    echo '<div class="white-container z-depth-1">
 		        <div class="stagger">
 		            <div class="page-navigation back-arrow" data-transition="slide" data-page="15"><span class="' . CLASS_BACK_ARROW . '"></span></div>
-		            <h2 class="header teal">'. (strlen($infoPlaylist["name"]) > 25 ? (substr($infoPlaylist["name"], 0, 25) . '...') : $infoPlaylist["name"]) .'</h2>
+		            <h2 class="header teal tooltipped" data-position="bottom" data-delay="50" data-tooltip="' . $infoPlaylist["name"] . '">'. truncateText($infoPlaylist["name"]) .'</h2>
 		            <div class="row content-container">
 		            	<div class="delete_container">
 	               	 		<span class="delete"><i class="fa fa-trash-o fa-2x"></i></span>
@@ -620,6 +620,7 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 						$(".delete").on("click", confirmDelete);
 						$(".confirm").on("click", deleteLists);
 					})
+
 		            function printSongs (playlist) {
 		                $.each(playlist, function(k, v) {
 		                    $("#songs")
@@ -723,14 +724,15 @@ if (isset($_POST['page']) && !empty($_POST['page']))
                         return false;
                     }
                     
-                    
 		            printSongs('. $songsInfoJson .');
+
 		            if (location.href.indexOf("zoeklijsten") > -1) {
 		            	$(".back-arrow").attr("data-page", 18);
+		            	$(".delete_container").remove();
 		            }
 
 		            function confirmDelete () {
-		            	$("#confirm_delete").openModal({dismissible:false});
+		            	$("#confirm_delete").openModal();
 		            }
 
 		            function deleteLists () {
@@ -787,17 +789,7 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 						        <label for="searchList">Zoek een lijst op naam</label>
 						    </div>
 							<table id="searchResults" class="list-menu">
-		                    	<tr>
-		                    		<th>
-		                    			
-		                    		</th>
-		                    		<th>
-		                    			Naam playlist:
-		                    		</th>
-		                    		<th>
-		                    			BPM
-		                    		</th>
-		                    	</tr>
+		                    	
 	                      </table>
 		    			</div>
     				</div>
@@ -813,8 +805,8 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 						'<h2 class="header teal">Nieuwe lijst</h2>
 						<div class="row content-container">
 							<div class="input-field col s10 m10 l8 offset-m1 offset-s1 offset-l2 form-field">
-						        <input id="duration" autofocus type="text" value="30" class="validate center">
-						        <label for="duration">Duur (minuten)</label>
+						        <input id="duration" type="text" value="30" class="validate center">
+						        <label class="active" for="duration">Duur (minuten)</label>
 						    </div>
 						    <div class="form-field col s10 m10 l8 offset-m1 offset-s1 offset-l2">
 						    	<p class="center">Snelheid (BPM): <span class="mdi-action-info-outline tooltipped" data-position="top" data-delay="0" data-tooltip="BPM staat voor Beats Per Minute"></span></p>

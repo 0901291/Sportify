@@ -80,7 +80,8 @@ function launchTransition (pageContent, transition) {
 								scrollTop: 0,
 								marginTop: newMarginTop
 							}, 600, function () {
-								$secondWhiteContainer.find("input[type='text']").first().focus();
+								if (size != "s")
+									$secondWhiteContainer.find("input[type='text']").first().focus();
 								launchOnResize ();
                                 $(".wrapper").css("overflow", "initial");
 							});
@@ -104,7 +105,8 @@ function launchTransition (pageContent, transition) {
 					zIndex: 	1
 				}, 600, function () {
 					$firstWhiteContainer.remove();
-					$(".white-container").find("input[type='text']").first().focus();
+					if (size != "s")
+						$(".white-container").find("input[type='text']").first().focus();
 					launchOnResize ();
 					$(".white-container").css("height", "initial");
 				});
@@ -119,8 +121,9 @@ function launchTransition (pageContent, transition) {
 		$(".white-container")
 			.css({
 				marginTop: newMarginTop
-			})
-			.find("input[type='text']").first().focus();
+			});
+		if (size != "s")
+			$(".white-container").find("input[type='text']").first().focus();
 		launchOnResize ();
 	}
 }
