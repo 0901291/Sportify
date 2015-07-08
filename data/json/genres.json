@@ -3,123 +3,123 @@
 		"genrematches":	{
 			"genre": [
 				{
-					"name": "rock",
+					"name": "Rock",
 					"artist_hot": 0.7
 				},
 				{
-					"name": "pop",
+					"name": "Pop",
 					"artist_hot": 0.8
 				},
 				{
-					"name": "house",
+					"name": "House",
 					"artist_hot": 0.7
 				},
 				{
-					"name": "acid house",
+					"name": "Acid house",
 					"artist_hot": 0.5
 				},
 				{
-					"name": "country",
+					"name": "Country",
 					"artist_hot": 0.5
 				},
 				{
-					"name": "jazz",
+					"name": "Jazz",
 					"artist_hot": 0.5
 				},
 				{
-					"name": "lounge",
+					"name": "Lounge",
 					"artist_hot": 0.5
 				},
 				{
-					"name": "reggae",
+					"name": "Reggae",
 					"artist_hot": 0.6
 				},
 				{
-					"name": "samba",
+					"name": "Samba",
 					"artist_hot": 0.5
 				},
 				{
-					"name": "trance",
+					"name": "Trance",
 					"artist_hot": 0.5
 				},
 				{
-					"name": "folk",
+					"name": "Folk",
 					"artist_hot": 0.5
 				},
 				{
-					"name": "dubstep",
+					"name": "Dubstep",
 					"artist_hot": 0.5
 				},
 				{
-					"name": "ambient",
+					"name": "Ambient",
 					"artist_hot": 0.3
 				},
 				{
-					"name": "bounce",
+					"name": "Bounce",
 					"artist_hot": 0.3
 				},
 				{
-					"name": "chillstep",
+					"name": "Chillstep",
 					"artist_hot": 0.3
 				},
 				{
-					"name": "bounce",
+					"name": "Bounce",
 					"artist_hot": 0.5
 				},
 				{
-					"name": "disco",
+					"name": "Disco",
 					"artist_hot": 0.5
 				},
 				{
-					"name": "dub",
+					"name": "Dub",
 					"artist_hot": 0.5
 				},
 				{
-					"name": "funk",
+					"name": "Funk",
 					"artist_hot": 0.5
 				},
 				{
-					"name": "hardstyle",
+					"name": "Hardstyle",
 					"artist_hot": 0.5
 				},
 				{
-					"name": "hardcore",
+					"name": "Hardcore",
 					"artist_hot": 0.5
 				},
 				{
-					"name": "hip pop",
+					"name": "Hip pop",
 					"artist_hot": 0.5
 				},
 				{
-					"name": "mambo",
+					"name": "Mambo",
 					"artist_hot": 0.3
 				},
 				{
-					"name": "punk",
+					"name": "Punk",
 					"artist_hot": 0.3
 				},
 				{
-					"name": "rap",
+					"name": "Rap",
 					"artist_hot": 0.5
 				},
 				{
-					"name": "remix",
+					"name": "Remix",
 					"artist_hot": 0.4
 				},
 				{
-					"name": "techno",
+					"name": "Techno",
 					"artist_hot": 0.4
 				},
 				{
-					"name": "trance",
+					"name": "Trance",
 					"artist_hot": 0.4
 				},
 				{
-					"name": "trapstep",
+					"name": "Trapstep",
 					"artist_hot": 0.3
 				},
 				{
-					"name": "workout",
+					"name": "Workout",
 					"artist_hot": 0.4
 				}
 			]
