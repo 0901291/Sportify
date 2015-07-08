@@ -11,7 +11,7 @@ if (isset($_GET["genre"]))
 	foreach ($data->{"results"}->{"genrematches"}->genre as $result) 
 	{	
 		$object = new stdClass();
-		if (strpos($result->{"name"}, $_GET["genre"]) !== false)
+		if (strpos(strtolower($result->{"name"}), strtolower($_GET["genre"])) !== false)
 		{
 			$object->name 		= $result->{"name"};
 			$object->artist_hot = $result->{"artist_hot"};

@@ -1,7 +1,5 @@
 <?php
 	require ('settings.php');
-	// $_POST["query"] 		= "eiropf";
-	// $_POST["searchType"] 	= "artist";
 	if (isset($_POST["query"]) && isset($_POST["searchType"]))
 	{
 		$query 		= urlencode ($_POST["query"]);
