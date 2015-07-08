@@ -4,6 +4,8 @@ function initializeProfile () {
 	$("#addProfile").on("click", setUpCreation);
 	$(".add").hide();
 	$("select").material_select();
+	$("#close-add-profile").hide();
+	$("#close-add-profile").on("click", backToStartscreen);
 }
 
 function getProfiles () {
@@ -52,6 +54,14 @@ function setUpCreation () {
 	$(".add").show();
 	$("#profiles").parent().find("h4").text("Nieuw Profiel");
 	$("#addProfileButton").on("click", createProfile);
+	$("#close-add-profile").show();
+}
+
+function backToStartscreen () {
+	$(".profileBox").show();
+	$(".add").hide();
+	$("#profiles").parent().find("h4").text("Kies je profiel");
+	$("#close-add-profile").hide();
 }
 
 function createProfile () {

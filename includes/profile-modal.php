@@ -1,6 +1,6 @@
 <div id="chooseProfile" class="modal">
 	<div class="modal-content">
-  		<h4 class="center">Kies je profiel</h4>
+  		<div class="back-arrow" id="close-add-profile"><span class="mdi-navigation-arrow-back black-text"></span></div><h4 class="center">Kies je profiel</h4>
         <em>Kies hieronder een profiel, of maak een nieuw profiel aan om Sportify met meerdere mensen te kunnen gebruiken!</em>
   		<ul id="profiles">
   			<li id="addProfile" class="profileBox">
