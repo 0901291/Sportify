@@ -22,6 +22,7 @@ function initPlaylist () {
 }
 
 function printPagination () {
+	console.log(currentOffset);
 	if (totalPlaylists > 10) {
 		var paginationUl = $("#playlist-pagination");
 		paginationUl.empty();
@@ -48,14 +49,15 @@ function printPagination () {
 			zero = currentOffset - 10;
 		}
 		else if (currentOffset == (Math.ceil(totalPlaylists / 10) * 10) - 10) {
-			zero = currentOffset - 40;
+			zero = 0;
 		}
 		else if (currentOffset == (Math.ceil(totalPlaylists / 10) * 10) - 20) {
-			zero = currentOffset - 30;
+			zero = currentOffset - 20;
 		}
 		else {
 			zero = currentOffset - 20;
 		}
+		console.log(zero);
 		var maxPages = (Math.ceil(totalPlaylists / 10) * 10) / 10;
 		if (maxPages > 5) {
 			maxPages = 5;
@@ -97,12 +99,12 @@ function getUsersPlaylists (offset) {
 	$.ajax({
 		url: 		"https://api.spotify.com/v1/users/" + getCookie("user_id") + "/playlists?limit=10&offset=" + offset,
 		headers: {
-            'Authorization': 'Bearer ' + getCookie("access_token") //localStorage.access_token is a string.
+            'Authorization': 'Bearer ' + getCookie("access_token")
         },
 		dataType: 	'json',
 		success: 	function (output) {
 			setTimeout(function () {
-				setTotalPlaylists (output);
+				setTotalPlaylists (output.total);
 				printPagination ();
 				printPlaylists (output);
 			}, 100);
@@ -110,8 +112,8 @@ function getUsersPlaylists (offset) {
 	});
 }
 
-function setTotalPlaylists (output) {
-	totalPlaylists = output.total;
+function setTotalPlaylists (total) {
+	totalPlaylists = total;
 }
 
 function printPlaylists (playlists) {
