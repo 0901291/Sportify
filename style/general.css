@@ -296,7 +296,7 @@ li.interval-item .interval-label {
 	font-style: italic;
 	font-size: 	1em;
 }
-#chooseProfile {
+#chooseProfile, #confirm_delete {
 	z-index:   10000;
 	margin-top: 50px;
 }

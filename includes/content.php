@@ -382,7 +382,7 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 	            $data   = getProfilePlaylists($conn);
 	            
 	            while ($row = $data -> fetch_assoc()) {
-	                echo '<tr data-page="16" data-transition="slide" data-item="'. $row["idPlaylists"] .'" class="page-navigation border-bottom playlist"> <td style="width: 74px" class="albumart"><img src="'. $row["image"] . '"></td><td style="width: 74px; display: none;" class="delete_td"><input type="checkbox" id="' . $row["idPlaylists"] . '" value="' . $row["idPlaylists"] . '"><label for="' . $row["idPlaylists"] . '"></td><td>'. $row["name"] . '</td> <td class="center"> '. $row["BPM"] . '</td></tr>';
+	                echo '<tr data-page="16" data-transition="slide" data-item="'. $row["idPlaylists"] .'" class="page-navigation border-bottom playlist"> <td style="width: 74px" class="albumart"><img src="'. $row["image"] . '"></td><td style="width: 74px; display: none;" class="delete_td"><input type="checkbox" id="playlist_' . $row["idPlaylists"] . '" value="' . $row["idPlaylists"] . '"><label for="playlist_' . $row["idPlaylists"] . '"></td><td>'. $row["name"] . '</td> <td class="center"> '. $row["BPM"] . '</td></tr>';
 	            }
 
 	            if ($data->num_rows == 0)
@@ -399,10 +399,16 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 	            return $conn -> query($getPlaylistsQuery);
 	        }
 	        echo '<div class="white-container z-depth-1">
-	           <div class="stagger">
-	               <div class="page-navigation back-arrow" data-transition="slide" data-page="home"><span class="' . CLASS_BACK_ARROW . '"></span></div>
-	               <h2 class="header teal">Mijn lijsten</h2>
-	               <div class="row content-container">
+	            <div class="stagger">
+	                <div class="page-navigation back-arrow" data-transition="slide" data-page="home"><span class="' . CLASS_BACK_ARROW . '"></span></div>
+	                <h2 class="header teal">Mijn lijsten</h2>
+	                <div class="row content-container">
+	               	 	<div class="delete_container">
+	               	 		<span class="delete toggleOff"><i class="fa fa-trash-o fa-2x"></i></span>
+	               			<span class="cancel_delete" style="display:none;">Annuleren</span>
+	               			<span class="select_all deselected" style="display:none;">Alles selecteren</span>
+	               			<span class="delete_button" style="display:none;">Verwijder</span>
+	               		</div>
 	                    <table>
 	                    	<tr>
 	                    		<th>
@@ -417,18 +423,31 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 	                    	</tr>
 	                            '; printProfilePlaylists($conn);  echo '
 	                      </table>
-	               </div>
-	           </div>
-	           <script>
-	           var toggling = false;
+	                </div>
+	            </div>
+	            <script>
+	            var toggling = false;
 	           	function toggleDelete() {
 	           		if (!toggling) {
 		           		toggling = true;
+		           		if ($(".delete").hasClass("toggleOff")) {
+							$(".delete").removeClass("toggleOff").addClass("toggleOn").hide();
+							$(".delete_button").show();
+							$(".cancel_delete").show();
+							$(".select_all").show();
+		           		}
+		           		else {
+		           			$("input[type=checkbox]:checked").prop("checked", false);
+		           			$(".delete").removeClass("toggleOn").addClass("toggleOff").show();
+		           			$(".delete_button").hide();
+		           			$(".cancel_delete").hide();
+		           			$(".select_all").hide();
+		           		}
 		           		$.each($(".playlist"), function (k, v) {
 		           			var playlist = $(v);
 		           			var albumart = playlist.find(".albumart");
 		           			var delete_td = playlist.find(".delete_td");
-		           			if ($(albumart).css("display") == "none") {
+		           			if ($(".delete").hasClass("toggleOff")) {
 			           			delete_td.fadeToggle("fast", function () {
 			           				albumart.fadeToggle("fast");
 			           				toggling = false;
@@ -443,6 +462,57 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 		           		})
 					}
 	           	}
+
+	           	$(function () {
+	           		$("tr").on("click", ".delete_td", function (e) {
+	           			e.stopPropagation();
+	           		})
+					$(".delete_container").on("click", ".delete.toggleOff", toggleDelete);
+					$(".delete_container").on("click", ".delete_button", confirmDelete);
+					$(".confirm").on("click", deleteLists);
+					$(".delete_container").on("click", ".select_all", toggleSelectAll);
+					$(".delete_container").on("click", ".cancel_delete", toggleDelete);
+	           	});
+
+				function toggleSelectAll () {
+	           		if ($(".select_all").hasClass("selected")) {
+						$(".select_all").removeClass("selected").addClass("deselected").text("Alles selecteren");
+						$("input[type=checkbox]:checked").prop("checked", false)
+	           		}
+	           		else {
+	           			$(".select_all").addClass("selected").removeClass("deselected").text("Niks selecteren");
+	           			$("input[type=checkbox]").prop("checked", true);
+	           		}
+				}
+
+				function confirmDelete () {
+					$("#confirm_delete").openModal({dismissible:false});
+				}
+
+				function deleteLists () {
+					var playlists = [];
+					if ($("input[type=checkbox]:checked").length > 0) {
+						$("input[type=checkbox]:checked").each(function (k, v) {
+							playlists.push($(v).val());
+						});
+						console.log(playlists);
+						$.ajax({
+							url: "includes/deleteplaylists.php",
+							method: "post",
+							dataType: "text",
+							data: {
+								playlists: playlists
+							},
+							success: function (output) {
+								console.log(output);
+								location.reload();
+							},
+							error: function (output) {
+								console.log(output);
+							}
+						})
+					}
+				}
 	           </script>
 	         </div>';
 	    	break;
@@ -528,6 +598,9 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 		            <div class="page-navigation back-arrow" data-transition="slide" data-page="15"><span class="' . CLASS_BACK_ARROW . '"></span></div>
 		            <h2 class="header teal">'. (strlen($infoPlaylist["name"]) > 25 ? (substr($infoPlaylist["name"], 0, 25) . '...') : $infoPlaylist["name"]) .'</h2>
 		            <div class="row content-container">
+		            	<div class="delete_container">
+	               	 		<span class="delete"><i class="fa fa-trash-o fa-2x"></i></span>
+	               		</div>
 		                <div class="center">
 		                    <h4>Afspeellijst</h4>
 		                    <ul id="songs" class="center col s12 m12 l12">
@@ -545,6 +618,10 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 		    		    </div>
 		            </div>
 		            <script>
+					$(function () {
+						$(".delete").on("click", confirmDelete);
+						$(".confirm").on("click", deleteLists);
+					})
 		            function printSongs (playlist) {
 		                $.each(playlist, function(k, v) {
 		                    $("#songs")
@@ -652,6 +729,24 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 		            printSongs('. $songsInfoJson .');
 		            if (location.href.indexOf("zoeklijsten") > -1) {
 		            	$(".back-arrow").attr("data-page", 18);
+		            }
+
+		            function confirmDelete () {
+		            	$("#confirm_delete").openModal({dismissible:false});
+		            }
+
+		            function deleteLists () {
+	            		$.ajax({
+	            			url: "includes/deleteplaylists.php",
+	            			method: "post",
+	            			dataType: "text",
+	            			data: {
+	            				playlists: [' . $_POST["extraData"] . ']
+	            			},
+	            			success: function () {
+	            				nextPage($(".back-arrow").attr("data-page"), "slide");
+	            			}
+	            		})
 		            }
 		            </script>
 		        </div>
