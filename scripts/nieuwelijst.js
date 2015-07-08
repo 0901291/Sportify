@@ -375,6 +375,7 @@ function pushOutputToSongsArray (output) {
 }
 
 function getSeveralTracks (ids, arrayToUse) {
+    console.log(ids);
     var spotifyAPIBase = "https://api.spotify.com/v1/tracks/?market=NL&ids=";
     var output;
     return $.ajax({
@@ -406,14 +407,15 @@ function validateSpotifySongs (songs, arrayToUse) {
 }
 
 function findSpotifyEquivalents () {
+    console.log(songInfo[0].length + " " + songInfo[1].length);
     connectionToast = setTimeout(function () {toast("Je internet snelheid is niet optimaal, het kan iets langer duren dan normaal.", 60000)}, 8000);
     if (songInfo[0].length > 50) {
         rightSongs[0] = [];
         getSeveralTracks(songInfo[0].slice(0, 50).join(","), rightSongs[0])        
         if (localStorage.trainingType == "intervaltraining")
-           getSeveralTracks(songInfo[0].slice(51, songInfo[0].length).join(","), rightSongs[0]);
+           getSeveralTracks(songInfo[0].slice(50, songInfo[0].length).join(","), rightSongs[0]);
         else 
-            getSeveralTracks(songInfo[0].slice(51, songInfo[0].length).join(","), rightSongs[0]).done(generatePlaylist);
+            getSeveralTracks(songInfo[0].slice(50, songInfo[0].length).join(","), rightSongs[0]).done(generatePlaylist);
         setProgressBar (1, 10);
     }
     else {
@@ -427,9 +429,9 @@ function findSpotifyEquivalents () {
     if (localStorage.trainingType == "intervaltraining") {
         rightSongs[1] = [];
         if (songInfo[1].length > 50) {
-            getSeveralTracks(songInfo[1].slice(0, 50).join(","), rightSongs[1]); 
+            getSeveralTracks(songInfo[1].slice(0, 50).join(","), rightSongs[1]);
             
-            getSeveralTracks(songInfo[1].slice(51, songInfo[0].length).join(","), rightSongs[1]).done(generatePlaylist);
+            getSeveralTracks(songInfo[1].slice(50, songInfo[1].length).join(","), rightSongs[1]).done(generatePlaylist);
         }
         else
             getSeveralTracks(songInfo[1].join(","), rightSongs[1]).done(generatePlaylist);
