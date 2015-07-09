@@ -364,7 +364,13 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 	                        </div>
 	                    </div>
 	                </div>
-	                <script>$.getScript("scripts/addplaylist.js")</script>
+	                <script>
+                        $.getScript("scripts/addplaylist.js").done(function(){
+                            var playlist = JSON.parse(localStorage.playlist);
+                            localStorage.playlistImage = playlist[0][0][5];
+                            printSongs (playlist);
+                        });
+                    </script>
            		</div>';
 			break;
 		case 14:
@@ -722,6 +728,8 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 	                                    <label for="playlistName">Naam van de lijst</label>
 	                                </div>
 	                           </form>
+                               <ul id="songs" class="center col s12 m12 l12">
+	                           </ul>
 	                        </div>
 	                        
 	                        <div class="right page-navigation next-button-container" data-transition="slide" data-function="addPlaylist" data-page="11">
@@ -732,7 +740,34 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 	                        </div>
 	                    </div>
 	                </div>
-	                <script>$.getScript("scripts/addplaylist.js")</script>
+	                <script>
+                        $.getScript("scripts/addplaylist.js").done(function() {
+                            printPauperSongs(JSON.parse(localStorage.playlist));
+                        });
+
+                        function printPauperSongs (playlist) {
+                            $.each(playlist, function(k, v) {
+                                $("#songs")
+                                    .append($("<li>", {class: "song"})
+                                        .append($("<div>", {class:"play-image"})
+                                            .append($("<img>", {src: v[0][5], alt: v[0][1]}))
+                                            .append($("<i>", {class: "play mdi-av-play-arrow small"}))
+                                        .on("click", playAudio)
+                                        .attr("data-audio", v[0][4])
+                                        )
+                                        .append($("<div>", {class:"songInfo"})
+                                            .append($("<p>", {text: truncateText(v[0][2]), for: v[0][2], class: "tooltipped songTitle", "data-position": "top", "data-delay": "50", "data-tooltip": v[0][2]}))
+                                            .append($("<p>", {text: truncateText(v[0][1]), for: v[0][1], class: "tooltipped songArtist", "data-position": "top", "data-delay": "50", "data-tooltip": v[0][1]})))
+                                    )       
+                            });
+                            
+                            console.log($("songs"));
+		                $(".tooltipped").tooltip({delay: 50});
+		                launchOnResize();
+		            }
+                        
+
+                    </script>
            		</div>';
 	    		break;
             case 18:

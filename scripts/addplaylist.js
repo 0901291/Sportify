@@ -2,9 +2,6 @@ var usedSongs = [];
 $(initAddPlaylist);
 function initAddPlaylist () {
     // You have to JSON.parse, else it's just a string (because you can't just store arrays in localStorage);
-    var playlist = JSON.parse(localStorage.playlist);
-    localStorage.playlistImage = playlist[0][0][5];
-    printSongs (playlist);
     $("#playlistName").val("Sportify - " + (localStorage.trainingType == "intervaltraining" ? "Intervaltraining" : (localStorage.bpm + " bpm")) + " - " + localStorage.duration / 60000 + " minuten - " + getDate ());
     $("#songs").on("click", ".remove-song", searchNewSong);
     fillUsedSongs (playlist);
@@ -17,6 +14,7 @@ function fillUsedSongs (playlist) {
 }
 
 function printSongs (playlist) {
+    console.log("run");
     $("#songs").empty();
     $.each(playlist, function(k, v) {
         $("#songs")

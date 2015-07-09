@@ -89,6 +89,7 @@ function getDate () {
 }
 
 function truncateText (text) {
+    //console.log(text);
 	var tempText = text;
 	if (tempText.replace(/<\/?[^>]+(>|$)/g, "").length > 25) {
 		return text.substring(0, 23) + "...";
