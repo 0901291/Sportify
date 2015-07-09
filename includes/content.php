@@ -16,14 +16,14 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 						<h3 class="intro-subtitle">Kies hieronder uit wat voor muziek je lijst moet bestaan.</h3>
 						<div class="row content-container">
 							<ul class="row list-menu">
-								<li data-page="3" data-transition="slide" class="choose-personalized-button waves-effect waves-green border-bottom page-navigation col s12 left-align">
-									<span>Genres</span>
+								<li data-page="3" data-transition="slide" class="choose-personalized-button waves-effect waves-green border-bottom page-navigation col s12 center">
+									Genres
 								</li>
-								<li data-page="4" data-transition="slide" class="choose-personalized-button waves-effect waves-green border-bottom page-navigation col s12 left-align">
-									<span>Artiesten</span>
+								<li data-page="4" data-transition="slide" class="choose-personalized-button waves-effect waves-green border-bottom page-navigation col s12 center">
+									Artiesten
 								</li>
-								<li data-page="'  . (isLoggedIn() ? 6 : 12) . '" data-transition="slide" class="choose-personalized-button waves-effect waves-green border-bottom page-navigation col s12 left-align personalize">
-									<span>Eigen afspeellijst</span>
+								<li data-page="'  . (isLoggedIn() ? 6 : 12) . '" data-transition="slide" class="choose-personalized-button waves-effect waves-green border-bottom page-navigation col s12 center">
+									Eigen afspeellijst
 								</li>
 							</ul>
 							<div class="right page-navigation next-button-container" data-transition="slide" data-page="7">
@@ -839,15 +839,15 @@ Heb je vandaag geen zin om zelf keuzes te maken, druk dan op ‘skip’ en dan m
 						<div><span id="open-page-info" class="mdi-action-info-outline fa-2x"></span></div>
 						<div class="row content-container">
 							<div class="input-field col s10 m10 l8 offset-m1 offset-s1 offset-l2 form-field">
-						        <input id="duration" type="text" value="30" class="validate left-align">
+						        <input id="duration" type="text" value="30" class="validate center">
 						        <label class="active" for="duration">Duur (minuten)</label>
 						    </div>
 						    <div class="form-field col s10 m10 l8 offset-m1 offset-s1 offset-l2">
-						    	<p class="left-align">Snelheid (BPM): <span class="mdi-action-info-outline tooltipped" data-position="top" data-delay="0" data-tooltip="BPM staat voor Beats Per Minute"></span></p>
+						    	<p class="center">Snelheid (BPM): <span class="mdi-action-info-outline tooltipped" data-position="top" data-delay="0" data-tooltip="BPM staat voor Beats Per Minute"></span></p>
 									<input type="range" id="bpm">
 						    </div>
 							<div class="col s10 m10 l8 offset-m1 offset-s1 offset-l2 form-field">
-								<p class="left-align">Training:</p>
+								<p class="center">Training:</p>
 								<div class="choose-training" style="width: 200px; margin: 0px auto !important;">
 									<div>
 										<input checked class="with-gap choose-training" value="standaardtraining" data-page="2" name="training" type="radio" id="standaardtraining"  />
