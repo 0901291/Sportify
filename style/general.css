@@ -486,6 +486,13 @@ h4, h5 {
 	color: 		#fff;
 }
 
+#training_label {
+	margin-top: 20px;
+	margin-bottom: 10px;
+	font-size: 17px;
+}
 
-
+.choose-training {
+	margin-left: -15px !important;
+}
 

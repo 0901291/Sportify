@@ -847,13 +847,11 @@ Heb je vandaag geen zin om zelf keuzes te maken, druk dan op ‘skip’ en dan m
 									<input type="range" id="bpm">
 						    </div>
 							<div class="col s10 m10 l8 offset-m1 offset-s1 offset-l2 form-field">
-								<p class="center">Training:</p>
-								<div class="choose-training" style="width: 200px; margin: 0px auto !important;">
+								<p id="training_label" class="center">Training:</p>
+								<div class="choose-training" style="width: 400px;">
 									<div>
 										<input checked class="with-gap choose-training" value="standaardtraining" data-page="2" name="training" type="radio" id="standaardtraining"  />
 			    						<label for="standaardtraining">Standaardtraining</label>
-									</div>
-			    					<div>
 			    						<input class="with-gap choose-training" name="training" value="intervaltraining" data-page="9" type="radio" id="intervaltraining"  />
 			    						<label for="intervaltraining">Intervaltraining</label>
 			    					</div>
