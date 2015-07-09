@@ -335,12 +335,17 @@ li.interval-item .interval-label {
 	top: 			0;
 	line-height: 	64px;
 }
+
 .remove-song:hover {
 	cursor: pointer;
 }
+
 .list-menu li.choose-personalized-button {
 	padding: 		36px 0 !important;
 	font-size: 17px;
+}
+.list-menu li.choose-personalized-button span {
+    margin-left:20px;
 }
 .border-bottom {
 	border-bottom: 	1px rgba(0,0,0,0.2) solid;
