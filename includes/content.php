@@ -219,8 +219,6 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 						<div class="page-navigation back-arrow" data-transition="slide" data-page="1"><span class="' . CLASS_BACK_ARROW . '"></span></div>
 						<h2 class="header teal">Intervaltraining</h2>
 						<h3 class="intro-subtitle">Stel je eigen training samen! Stel een snelheid in voor de rengedeeltes en voor de wandelgedeeltes. Druk op het groene plusje om een extra interval toe te voegen.</h3>
-						<a data-action="add" id="add-interval" class="btn-floating floating-button btn waves-effect waves-light green"><i class="mdi-content-add"></i></a>
-						<a data-action="remove" id="remove-interval" style="display:none;" class="btn-floating floating-button btn waves-effect waves-light red"><i class="mdi-content-remove"></i></a>
 						<div class="row content-container">
 							 <div class="form-field col s10 m10 l8 offset-m1 offset-s1 offset-l2">
 						    	<p class="center">Snelheid rennen (BPM): <span class="mdi-action-info-outline tooltipped" data-position="top" data-delay="50" data-tooltip="BPM staat voor Beats Per Minute"></span></p>
@@ -235,6 +233,13 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 								</div>
 						    </div>
 							<div id="duration" class="center col s10 m10 l8 offset-m1 offset-s1 offset-l2">Duur van de training: <strong><span></span> minuten</strong></div>
+							<div id="button_container" class="form-field col s10 m10 l8 offset-m1 offset-s1 offset-l2">
+								<a data-action="add" id="add-interval" class="btn-floating floating-button btn waves-effect waves-light green"><i class="mdi-content-add"></i></a>
+								<a data-action="remove" id="remove-interval" style="display:none;" class="btn-floating floating-button btn waves-effect waves-light red"><i class="mdi-content-remove"></i></a>
+								<div></div>
+								<p id="first-p">Voeg interval toe</p>
+								<p style="display:none" id="second-p">Verwijder interval</p>
+							</div>
 							<ul id="interval-container" class="col s6 m6 l6 offset-m3 offset-s3 offset-l3">
 							</ul>
 		    				<div class="right page-navigation next-button-container" data-transition="slide" data-function="validateIntervalTraining" data-page="2">

@@ -102,9 +102,11 @@ function addInterval (numberOfOne, numberOfTwo) {
 		};
 		if (newDurationTwo < 300000) {
 			$('#add-interval').hide();
+			$("#first-p").hide();
 		}
 		else {
 			$('#add-interval').show();
+			$("#first-p").show();
 		}
 		printIntervalTraining ();
 	}
@@ -113,9 +115,11 @@ function addInterval (numberOfOne, numberOfTwo) {
 	};
 	if (numberOfOne >= 0) {
 		$('#remove-interval').show();
+		$("#second-p").show();
 	}
 	else {
 		$('#remove-interval').hide();
+		$("#second-p").hide();
 	}
 }
 
@@ -129,16 +133,20 @@ function removeInterval (numberOfOne, numberOfTwo) {
 		};
 		if (newDurationTwo < 300000) {
 			$('#add-interval').hide();
+			$("#first-p").hide();
 		}
 		else {
 			$('#add-interval').show();
+			$("#first-p").show();
 		}
 	};
 	if (numberOfOne == 2) {
 		$('#remove-interval').hide();
+		$("#second-p").hide();
 	}
 	else {
 		$('#remove-interval').show();
+		$("#second-p").show();
 	};
 	printIntervalTraining ();
 }

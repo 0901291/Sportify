@@ -6,7 +6,7 @@
 	}
 	else
 	{
-		$page = 1;
+		$page = 9;
 	}
 ?>
 <!DOCTYPE html>

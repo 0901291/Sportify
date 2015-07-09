@@ -212,19 +212,29 @@ li.interval-item .interval-label {
 }
 .floating-button {
 	position: 	absolute;
-	width: 		40px !important;
-	height: 	40px !important;
 }
 .floating-button i {
 	line-height: 	40px !important;
 }
 #add-interval {
-	top: 		315px;
-	right: 		15px;
+	position: relative;
+	width: 		40px !important;
+	height: 	40px !important;
+	margin-left: 40px;
+	display: inline-block;
 }
 #remove-interval {
-	top: 		365px;
-	right: 		15px;
+	position: relative;
+	width: 		40px !important;
+	height: 	40px !important;
+	margin-left: 60px;
+	display: inline-block;
+}
+#button_container p {
+	float:left;
+}
+#button_container #second-p {
+	margin-left: 10px;
 }
 .interval-item i {
 	line-height: 	30px !important;
