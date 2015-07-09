@@ -6,7 +6,7 @@
 	}
 	else
 	{
-		$page = 9;
+		$page = 1;
 	}
 ?>
 <!DOCTYPE html>
@@ -19,6 +19,10 @@
 	<body>
 		<?php require ('includes/header.php') ?>
 		<?php require ("includes/profile-modal.php") ?>
+		<div id="page-info" class="modal">
+			<div class="modal-content">
+			</div>
+		</div>
 		<div class="wrapper">
 		</div>
 		<?php require ('includes/footer.php') ?>
@@ -39,6 +43,9 @@
 					echo "nextPage(" . $page . ", 'none');";
 				}
 			?>
+			function openPageInfo () {
+				$("#page-info").openModal();
+			}
 		</script>
 	</body>
 </html>

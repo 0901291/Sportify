@@ -84,6 +84,8 @@ function launchTransition (pageContent, transition) {
 									$secondWhiteContainer.find("input[type='text']").first().focus();
 								launchOnResize ();
                                 $(".wrapper").css("overflow", "initial");
+                                $("#page-info .modal-content").text($("#pageInfoText"));
+                                $("#open-page-info").on("click", openPageInfo);
 							});
 							$firstWhiteContainer.remove();
 
@@ -109,6 +111,8 @@ function launchTransition (pageContent, transition) {
 						$(".white-container").find("input[type='text']").first().focus();
 					launchOnResize ();
 					$(".white-container").css("height", "initial");
+					$("#page-info .modal-content").text($("#pageInfoText"));
+					$("#open-page-info").on("click", openPageInfo);
 				});
 		}
 	}
@@ -124,6 +128,8 @@ function launchTransition (pageContent, transition) {
 			});
 		if (size != "s")
 			$(".white-container").find("input[type='text']").first().focus();
+		$("#page-info .modal-content").text($("#pageInfoText").text());
+		$("#open-page-info").on("click", openPageInfo);
 		launchOnResize ();
 	}
 }

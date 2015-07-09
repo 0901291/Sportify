@@ -38,6 +38,9 @@
 					echo "nextPage(" . $page . ", 'none');";
 				}
 			?>
+			function openPageInfo () {
+				$("#page-info").openModal();
+			}
 			$($("input").focus());
 		</script>
 		<!-- <script src="scripts/addplaylist.js"></script> -->

@@ -12,6 +12,7 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 					<div class="stagger">
 						<div class="page-navigation back-arrow" data-transition="slide" data-page="1"><span class="' . CLASS_BACK_ARROW . '"></span></div>
 						<h2 class="header teal">Gepersonaliseerde muziek</h2>
+						<div><span id="open-page-info" class="mdi-action-info-outline fa-2x"></span></div>
 						<h3 class="intro-subtitle">Kies hieronder uit wat voor muziek je lijst moet bestaan.</h3>
 						<div class="row content-container">
 							<ul class="row list-menu">
@@ -33,6 +34,10 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 							</div>
 		    			</div>
     				</div>
+    				<div id="pageInfoText">
+		    				Houd je van alleen Rock en house geef dit dan aan via genre. Ben je meer in om muziek terug te krijgen die gebaseerd is op je favoriete artiest, klik dan op ‘Artiest’. Heb je liever je muziek gebaseerd op een eigen Spotify Afspeellijst, kies dan voor ‘Afspeellijst’.
+Heb je vandaag geen zin om zelf keuzes te maken, druk dan op ‘skip’ en dan maken wij een mooie lijst voor je.
+		    			</div>
     			</div>';
 			break;
 		case 3:
@@ -40,6 +45,7 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 					<div class="stagger">
 						<div class="page-navigation back-arrow" data-transition="slide" data-page="2"><span class="' . CLASS_BACK_ARROW . '"></span></div>
 						<h2 class="header teal">Genre</h2>
+						<div><span id="open-page-info" class="mdi-action-info-outline fa-2x"></span></div>
 						<div class="row content-container">
 							<div class="input-field col s10 m10 l8 offset-m1 offset-s1 offset-l2 form-field">
 						        <input data-type="genres" id="searchGenre" type="text" class="validate searchItems">
@@ -78,6 +84,9 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 					      <a href="#" class="waves-effect waves-green btn-flat modal-action modal-close">Okay</a>
 					    </div>
 					</div>
+					<div id="pageInfoText">
+		    				Klik op ‘zoek een genre’ om je genre op te zoeken, klik vervolgens op het genre dat je wilt toevoegen.
+		    			</div>
 				</div>
 				';
 			break;
@@ -86,6 +95,7 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 					<div class="stagger">
 						<div class="page-navigation back-arrow" data-transition="slide" data-page="2"><span class="' . CLASS_BACK_ARROW . '"></span></div>
 						<h2 class="header teal">Artiest</h2>
+						<div><span id="open-page-info" class="mdi-action-info-outline fa-2x"></span></div>
 						<div class="row content-container">
 							<div class="input-field col s10 m10 l8 offset-m1 offset-s1 offset-l2 form-field">
 						        <input data-type="artiesten" id="searchArtist" type="text" class="validate searchItems">
@@ -104,6 +114,10 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 		    					</p>
 		    				</div>
 						</div>
+						<div id="pageInfoText">
+		    				Klik op ‘zoek een artiest’ om je artiest op te zoeken, klik vervolgens op de artiest die je wilt toevoegen.
+
+		    			</div>
 					</div>
 				    <script>
 				   		var searchDisplayText = function(v){ return v.name; };
@@ -122,6 +136,7 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 					<div class="stagger">
 						<div class="page-navigation back-arrow" data-transition="slide" data-page="2"><span class="' . CLASS_BACK_ARROW . '"></span></div>
 						<h2 class="header teal">Gebruik een eigen lijst</h2>
+						<div><span id="open-page-info" class="mdi-action-info-outline fa-2x"></span></div>
 						<div class="row content-container">
                             <form id="uri-form">
                                 <div class="input-field col s10 m10 l8 offset-m1 offset-s1 offset-l2 form-field">
@@ -143,6 +158,10 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 		    						<span class="' . CLASS_NEXT_BUTTON . '"></span>
 		    					</p>
 		    				</div>
+		    			</div>
+		    			<div id="pageInfoText">
+		    				Klik op ‘zoek een Afspeellijst’ om je afspeellijst op te zoeken, klik vervolgens op de afspeellist die je wilt toevoegen.
+
 		    			</div>
 					</div>
 					<script>
@@ -218,7 +237,7 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 					<div class="stagger">
 						<div class="page-navigation back-arrow" data-transition="slide" data-page="1"><span class="' . CLASS_BACK_ARROW . '"></span></div>
 						<h2 class="header teal">Intervaltraining</h2>
-						<h3 class="intro-subtitle">Stel je eigen training samen! Stel een snelheid in voor de rengedeeltes en voor de wandelgedeeltes. Druk op het groene plusje om een extra interval toe te voegen.</h3>
+						<div><span id="open-page-info" class="mdi-action-info-outline fa-2x"></span></div>
 						<div class="row content-container">
 							 <div class="form-field col s10 m10 l8 offset-m1 offset-s1 offset-l2">
 						    	<p class="center">Snelheid rennen (BPM): <span class="mdi-action-info-outline tooltipped" data-position="top" data-delay="50" data-tooltip="BPM staat voor Beats Per Minute"></span></p>
@@ -248,6 +267,10 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 		    						<span class="' . CLASS_NEXT_BUTTON . '"></span>
 		    					</p>
 		    				</div>
+		    			</div>
+		    			<div id="pageInfoText">
+		    				Stel je eigen training samen! Stel een snelheid in voor de rengedeeltes en voor de wandelgedeeltes. Druk op het groene plusje om een extra interval toe te voegen.
+
 		    			</div>
 					</div>
 					<script>
@@ -357,6 +380,7 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 	                <div class="stagger">
 	                    <div class="page-navigation back-arrow" data-transition="slide" data-page="2" data-function="removeAttributes"><span class="' . CLASS_BACK_ARROW . '"></span></div>
 	                    <h2 class="header teal">Lijst wijzigen</h2>
+	                    <div><span id="open-page-info" class="mdi-action-info-outline fa-2x"></span></div>
 	                    <h3 class="intro-subtitle">Beluister je lijst en vervang eventueel tracks.</h3>
 	                    <div class="row content-container">
 	                        <ul id="songs" class="center col s12 m12 l12">
@@ -368,6 +392,10 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 	                            </p>
 	                        </div>
 	                    </div>
+	                    <div id="pageInfoText">
+		    				Dit is jouw Lijst, druk op kruisje om nummers te vervangen door een ander nummer. Wil je de nummers eerst even luisteren klik dan op het play icoontje op de album cover.
+
+		    			</div>
 	                </div>
 	                <script>
                         $.getScript("scripts/addplaylist.js").done(function(){
@@ -425,6 +453,7 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 	            <div class="stagger">
 	                <div class="page-navigation back-arrow" data-transition="slide" data-page="home"><span class="' . CLASS_BACK_ARROW . '"></span></div>
 	                <h2 class="header teal">Mijn lijsten</h2>
+	                <div><span id="open-page-info" class="mdi-action-info-outline fa-2x"></span></div>
 	                <div class="select_all"><input id="select-checkbox" type="checkbox"><label for="select-checkbox"></label></div>
 	                <div class="delete_button"><i class="fa fa-trash-o fa-2x"></i></div>
 	                <div class="row content-container">
@@ -432,6 +461,9 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 	                            '; printProfilePlaylists($conn);  echo '
 	                    </table>
 	                </div>
+	                <div id="pageInfoText">
+		    				Wil je je eigen lijst bekijken, klik dan op een van je lijsten en geniet nog even na.
+		    			</div>
 	            </div>
 	            <script>
 	           	$(function () {
@@ -780,6 +812,7 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 					<div class="stagger">
 						<div class="page-navigation back-arrow" data-transition="slide" data-page="home"><span class="' . CLASS_BACK_ARROW . '"></span></div>
 						<h2 class="header teal">Zoek lijsten</h2>
+						<div><span id="open-page-info" class="mdi-action-info-outline fa-2x"></span></div>
 						<div class="row content-container">
                             <div class="input-field col s10 m10 l8 offset-m1 offset-s1 offset-l2 form-field">
 						        <input id="searchList" autofocus type="text" class="validate center">
@@ -788,6 +821,9 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 							<table id="searchResults" class="list-menu">
 		                    	
 	                      </table>
+		    			</div>
+		    			<div id="pageInfoText">
+		    				Klik op "zoek een lijst" en typ daar de lijst in die je wilt opzoeken. Klik vervolgens op de desbetreffende lijst.
 		    			</div>
     				</div>
                     <script>
@@ -800,6 +836,7 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 					<div class="stagger">
 						' . (isLoggedIn () ? ('<div class="page-navigation back-arrow" data-transition="slide" data-page="home"><span class="' . CLASS_BACK_ARROW . '"></span></div>') : '' . '') . 
 						'<h2 class="header teal">Nieuwe lijst</h2>
+						<div><span id="open-page-info" class="mdi-action-info-outline fa-2x"></span></div>
 						<div class="row content-container">
 							<div class="input-field col s10 m10 l8 offset-m1 offset-s1 offset-l2 form-field">
 						        <input id="duration" type="text" value="30" class="validate left-align">
@@ -828,6 +865,10 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 		    						<span class="' . CLASS_NEXT_BUTTON . '"></span>
 		    					</p>
 		    				</div>
+		    			</div>
+		    			<div id="pageInfoText">
+		    				De start van het maken van jou gepersonaliseerde Spotify lijst. Denk jij de snelheid te hebben van Usain Bolt zet de BPM dan rond ‘Gevorderd’. Kan je dat misschien niet aan zet hem dan wat lager voor een fijnere ervaring. 
+		    				Voor beginners raden we aan om ‘intervaltraining’ te kiezen. Dit zorgt voor een fijnere ervaring voor jezelf.
 		    			</div>
 					</div>
 					<script>

@@ -47,6 +47,9 @@
             echo "nextPage(" . $page . ", 'none');";
         }
         ?>
+        function openPageInfo () {
+                $("#page-info").openModal();
+            }
     </script>
 </body>
 </html>
