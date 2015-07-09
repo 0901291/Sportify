@@ -567,7 +567,7 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 		                </div>
                         <div class="right page-navigation next-button-container" data-transition="slide" data-function="duplicatePlaylist" data-page="11">
                             <p class="waves-effect waves-orange btn-flat next-button"> 
-                                Save 
+                                Voeg toe 
                                 <span class="' . CLASS_NEXT_BUTTON . '"></span>
                             </p>
 		    		    </div>
@@ -726,7 +726,7 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 	                        
 	                        <div class="right page-navigation next-button-container" data-transition="slide" data-function="addPlaylist" data-page="11">
 	                            <p class="waves-effect waves-orange btn-flat next-button"> 
-	                                Save 
+	                                Voeg toe 
 	                                <span class="' . CLASS_NEXT_BUTTON . '"></span>
 	                            </p>
 	                        </div>
