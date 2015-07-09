@@ -343,12 +343,6 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 			   <div class="col s10 m10 l10 offset-m1 offset-s1 offset-l1">
 			    <a class="waves-effect waves-light btn teal text" href="https://accounts.spotify.com/authorize?client_id=' . SPOTIFY_CLIENT_ID . '&response_type=token&redirect_uri=' . ROOT . 'nieuwelijst.php%3Fpage%3D6&scope=playlist-read-private%20playlist-modify-public%20playlist-modify-private' . (isLoggedIn() ? '"' : '&show_dialog=true"') . '><img class="spotify-logo-mini" src="images/spotify-logo-mini.png" alt="">Login met Spotify</a>
 			   </div>
-			      <div class="right page-navigation next-button-container" data-transition="slide" data-page="11">
-			       <p class="waves-effect waves-orange btn-flat next-button"> 
-			        Done
-			        <span class="' . CLASS_NEXT_BUTTON . '"></span>
-			       </p>
-			      </div>
 			  </div>
 			 </div>
 			</div>';

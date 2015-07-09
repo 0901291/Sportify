@@ -249,10 +249,11 @@ li.interval-item .interval-label {
 	margin-top: 0.75em;
 }
 #songs .song:nth-child(odd) {
-	background-color: #F5F5F5;
+	background-color: #E5E5E5;
 }
 #songs .song:nth-child(even) {
-	background-color: white;
+	background-color: #F6F6F6
+;
 }
 .song {
 	position: 	relative;
