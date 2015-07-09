@@ -374,15 +374,32 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 	        function printProfilePlaylists ($conn)
 	        {
 	            $data   = getProfilePlaylists($conn);
-	            
-	            while ($row = $data -> fetch_assoc()) {
-	            	$name = truncateText($row["name"]);
-	                echo '<tr data-page="16" data-transition="slide" data-item="'. $row["idPlaylists"] .'" class="page-navigation border-bottom playlist"> <td style="width: 74px; height: 100px;" class="albumart"><img src="'. $row["image"] . '"></td><td style="width: 74px; height: 100px; display: none;" class="delete_td"><input type="checkbox" id="playlist_' . $row["idPlaylists"] . '" value="' . $row["idPlaylists"] . '"><label for="playlist_' . $row["idPlaylists"] . '"></td><td class="tooltipped" data-position="top" data-delay="0" data-tooltip="' . $row["name"] . '">'. $name . '</td> <td class="center"> '. $row["BPM"] . '</td></tr>';
-	            }
 
 	            if ($data->num_rows == 0)
 	            {
-	            	echo '<li class="col s12 center">Je hebt nog geen afspeellijsten.</li>';
+	            	echo '<ul><li style="margin-top:30px;" class="col s12 center">Je hebt nog geen afspeellijsten.</li></ul>';
+	            }
+	            else
+	            {
+	            	echo "	                    	<tr>
+	                    		<th>
+	                    			
+	                    		</th>
+	                    		<th>
+	                    			Naam afspeellijst
+	                    		</th>
+	                    		<th>
+	                    			BPM
+	                    		</th>
+	                    		<th>
+	                    			Verwijder
+	                    		</th>
+	                    	</tr>";
+	            }
+
+	            while ($row = $data -> fetch_assoc()) {
+	            	$name = truncateText($row["name"]);
+	                echo '<tr data-page="16" data-transition="slide" data-item="'. $row["idPlaylists"] .'" class="page-navigation border-bottom playlist"> <td style="width: 74px; height: 100px;" class="albumart"><img src="'. $row["image"] . '"></td><td class="tooltipped" data-position="top" data-delay="0" data-tooltip="' . $row["name"] . '">'. $name . '</td><td class="center"> '. $row["BPM"] . '</td><td class="delete_td"><input type="checkbox" id="playlist_' . $row["idPlaylists"] . '" value="' . $row["idPlaylists"] . '"><label for="playlist_' . $row["idPlaylists"] . '"></td></tr>';
 	            }
 	        }
 
@@ -397,98 +414,47 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 	            <div class="stagger">
 	                <div class="page-navigation back-arrow" data-transition="slide" data-page="home"><span class="' . CLASS_BACK_ARROW . '"></span></div>
 	                <h2 class="header teal">Mijn lijsten</h2>
+	                <div class="select_all"><input id="select-checkbox" type="checkbox"><label for="select-checkbox"></label></div>
+	                <div class="delete_button"><i class="fa fa-trash-o fa-2x"></i></div>
 	                <div class="row content-container">
-	               	 	<div class="delete_container">
-	               	 		<span class="delete toggleOff"><i class="fa fa-trash-o fa-2x"></i></span>
-	               			<span class="cancel_delete" style="display:none;">Annuleren</span>
-	               			<span class="select_all deselected" style="display:none;">Alles selecteren</span>
-	               			<span class="delete_button" style="display:none;">Verwijder</span>
-	               		</div>
 	                    <table>
-	                    	<tr>
-	                    		<th>
-	                    			
-	                    		</th>
-	                    		<th>
-	                    			Naam playlist:
-	                    		</th>
-	                    		<th>
-	                    			BPM
-	                    		</th>
-	                    	</tr>
 	                            '; printProfilePlaylists($conn);  echo '
-	                      </table>
+	                    </table>
 	                </div>
 	            </div>
 	            <script>
-	            var toggling = false;
-	           	function toggleDelete() {
-	           		if (!toggling) {
-		           		toggling = true;
-		           		if ($(".delete").hasClass("toggleOff")) {
-							$(".delete").removeClass("toggleOff").addClass("toggleOn").hide();
-							$(".delete_button").show();
-							$(".cancel_delete").show();
-							$(".select_all").show();
-		           		}
-		           		else {
-		           			$("input[type=checkbox]:checked").prop("checked", false);
-		           			$(".delete").removeClass("toggleOn").addClass("toggleOff").show();
-		           			$(".delete_button").hide();
-		           			$(".cancel_delete").hide();
-		           			$(".select_all").hide();
-		           		}
-		           		$.each($(".playlist"), function (k, v) {
-		           			var playlist = $(v);
-		           			var albumart = playlist.find(".albumart");
-		           			var delete_td = playlist.find(".delete_td");
-		           			if ($(".delete").hasClass("toggleOff")) {
-			           			delete_td.fadeToggle("fast", function () {
-			           				albumart.fadeToggle("fast");
-			           				toggling = false;
-			           			});
-		           			}
-		           			else {
-		           				albumart.fadeToggle("fast", function () {
-			           				delete_td.fadeToggle("fast");
-			           				toggling = false;
-			           			});
-							}
-		           		})
-					}
-	           	}
-
 	           	$(function () {
 	           		$("tr").on("click", ".delete_td", function (e) {
 	           			e.stopPropagation();
 	           		})
-					$(".delete_container").on("click", ".delete.toggleOff", toggleDelete);
-					$(".delete_container").on("click", ".delete_button", confirmDelete);
+					$(".delete_button").on("click", confirmDelete);
 					$(".confirm").on("click", deleteLists);
-					$(".delete_container").on("click", ".select_all", toggleSelectAll);
-					$(".delete_container").on("click", ".cancel_delete", toggleDelete);
+					$(".select_all #select-checkbox").on("change", toggleSelectAll);
 					$(".tooltipped").tooltip({delay: 0});
 	           	});
 
 				function toggleSelectAll () {
 	           		if ($(".select_all").hasClass("selected")) {
-						$(".select_all").removeClass("selected").addClass("deselected").text("Alles selecteren");
-						$("input[type=checkbox]:checked").prop("checked", false)
+						$(".select_all").removeClass("selected").addClass("deselected");
+						$("input[type=checkbox]:checked").prop("checked", false);
 	           		}
 	           		else {
-	           			$(".select_all").addClass("selected").removeClass("deselected").text("Niks selecteren");
+	           			$(".select_all").addClass("selected").removeClass("deselected");
 	           			$("input[type=checkbox]").prop("checked", true);
 	           		}
 				}
 
 				function confirmDelete () {
-					$("#confirm_delete").openModal();
+					if ($(".delete_td input[type=checkbox]:checked").length > 0)
+						$("#confirm_delete").openModal();
+					else
+						toast("Selecteer eerst minimaal één lijst", 4000);
 				}
 
 				function deleteLists () {
 					var playlists = [];
-					if ($("input[type=checkbox]:checked").length > 0) {
-						$("input[type=checkbox]:checked").each(function (k, v) {
+					if ($(".delete_td input[type=checkbox]:checked").length > 0) {
+						$(".delete_td input[type=checkbox]:checked").each(function (k, v) {
 							playlists.push($(v).val());
 						});
 						console.log(playlists);
@@ -593,12 +559,9 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 		        <div class="stagger">
 		            <div class="page-navigation back-arrow" data-transition="slide" data-page="15"><span class="' . CLASS_BACK_ARROW . '"></span></div>
 		            <h2 class="header teal tooltipped" data-position="bottom" data-delay="50" data-tooltip="' . $infoPlaylist["name"] . '">'. truncateText($infoPlaylist["name"]) .'</h2>
+		            <div class="delete_button"><i class="fa fa-trash-o fa-2x"></i></div>
 		            <div class="row content-container">
-		            	<div class="delete_container">
-	               	 		<span class="delete"><i class="fa fa-trash-o fa-2x"></i></span>
-	               		</div>
 		                <div class="center">
-		                    <h4>Afspeellijst</h4>
 		                    <ul id="songs" class="center col s12 m12 l12">
 		                  </ul>
 		                </div>
@@ -611,7 +574,7 @@ if (isset($_POST['page']) && !empty($_POST['page']))
 		            </div>
 		            <script>
 					$(function () {
-						$(".delete").on("click", confirmDelete);
+						$(".delete_button").on("click", confirmDelete);
 						$(".confirm").on("click", deleteLists);
 					})
 

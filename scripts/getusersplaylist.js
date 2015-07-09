@@ -22,7 +22,6 @@ function initPlaylist () {
 }
 
 function printPagination () {
-	console.log(currentOffset);
 	if (totalPlaylists > 10) {
 		var maxPages = (Math.ceil(totalPlaylists / 10) * 10) / 10;
 		if (maxPages > 5) {
@@ -48,25 +47,19 @@ function printPagination () {
 		var zero;
 		if (currentOffset == 0) {
 			zero = 0;
-			console.log("if 1");
 		}
 		else if (currentOffset == 10) {
 			zero = currentOffset - 10;
-			console.log("if 2");
 		}
 		else if (currentOffset == (Math.ceil(totalPlaylists / 10) * 10) - 10) {
 			zero = (Math.ceil(totalPlaylists / 10) * 10) - (maxPages * 10);
-			console.log("if 3");
 		}
 		else if (currentOffset == (Math.ceil(totalPlaylists / 10) * 10) - 20) {
 			zero = (Math.ceil(totalPlaylists / 10) * 10) - (maxPages * 10);
-			console.log("if 4");
 		}
 		else {
 			zero = currentOffset - 20;
-			console.log("else");
 		}
-		console.log(zero);
 		for (var i = 1; i <= maxPages; i++) {
 			if (currentOffset == zero) {
 				classOfPagination = "active";
@@ -122,7 +115,6 @@ function setTotalPlaylists (total) {
 }
 
 function printPlaylists (playlists) {
-	console.log(playlists);
 	$("#playlists").empty();
 	if (totalPlaylists > 0) {
 		$.each (playlists.items, function (k, v) {

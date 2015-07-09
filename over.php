@@ -3,21 +3,21 @@ require ('includes/initialize.php');
 ?>
 <!DOCTYPE html>
 <html>
-  <head>
+    <head>
     <?php require ('includes/headincludes.php') ?>
     <link rel="stylesheet" href="style/steps.css">
     <title>Over<?= TITLE_SUFFIX ?></title>
-  </head>
-  <body>
+    </head>
+    <body>
     <?php require ('includes/header.php') ?>
     <div class="wrapper">
       <div class="white-container z-depth-1">
           <div class="stagger">
-            <h2 class="header teal">Over</h2>
+            <div class="page-navigation back-arrow" data-transition="slide" data-page="home"><span class="mdi-navigation-arrow-back"></span></div><h2 class="header teal">Over</h2>
             <div class="row content-container">
               <div class="col text center">
                 <h5 class="center">
-                  Sportify
+                    Sportify
                 </h5>
                   <p>
                     Sportify is de web-app die een playlist met hardloopmuziek maakt speciaal voor jou.
@@ -38,5 +38,5 @@ require ('includes/initialize.php');
     </div>
     <?php require ('includes/footer.php') ?>
     <?php require ('includes/scripts.php') ?>
-  </body>
+    </body>
 </html>

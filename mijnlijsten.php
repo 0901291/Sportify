@@ -24,7 +24,7 @@
     <?php require ("includes/profile-modal.php") ?>
     <div id="confirm_delete" class="modal">
         <div class="modal-content">
-            <p>Weet je zeker dat je deze lijst(en) wilt verwijderen? Je kunt dit niet ongedaan maken!</p>
+            <p>Weet je zeker dat je deze lijst(en) wilt verwijderen? Ze worden gewist in Spotify en Sportify. Je kunt dit niet ongedaan maken!</p>
             <div class="modal-footer">
                 <a href="#!" class="confirm modal-action modal-close waves-effect waves-green btn-flat">Ja</a>
                 <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat">Nee</a>

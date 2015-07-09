@@ -34,7 +34,6 @@ function getProfiles () {
             				$("#chooseProfile").closeModal();
                     		location.reload();
                     		window.location.hash = ""; //Removes the hash info from a URL.
-            				// CHECK INMAKEN DAT CONTROLEERD OF HET WEL OP JOUW Account is
 						})
 						.css({
             				backgroundColor: backgroundColor

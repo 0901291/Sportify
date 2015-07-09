@@ -424,7 +424,38 @@ h4, h5 {
 		padding-right: 0 !important;
 	}
 }
+.delete_button {
+	position: 	absolute;
+	right: 		10px;
+	width: 		30px;
+	height: 	56px;
+	top: 		13px;
+	float: 		right;
+	color: 		#fff;
+}
 
+.select_all {
+	position: 	absolute;
+	right: 		45px;
+	width: 		30px;
+	height: 	56px;
+	top: 		18px;
+	float: 		right;
+	color: 		#fff;
+}
+
+.select_all input[type="checkbox"]:not(:checked) + label::before {
+	border-color: #fff !important;
+}
+
+.select_all span, .select_all label {
+	color: #fff;
+}
+
+.delete_td label {
+	margin-top: 7px;
+	margin-left: 20px;
+}
 
 
 
