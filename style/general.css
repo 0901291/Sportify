@@ -436,7 +436,7 @@ h4, h5 {
 }
 .delete_button {
 	position: 	absolute;
-	right: 		10px;
+	right: 		45px;
 	width: 		30px;
 	height: 	56px;
 	top: 		13px;
@@ -446,7 +446,7 @@ h4, h5 {
 
 .select_all {
 	position: 	absolute;
-	right: 		45px;
+	right: 		75px;
 	width: 		30px;
 	height: 	56px;
 	top: 		18px;

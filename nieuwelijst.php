@@ -35,7 +35,7 @@
 					unset($_SESSION["currentPage"]);
 					if ($_GET["page"] == 17)
 					{
-						echo "login()";
+						echo "login();";
 					}
 				}
 				else
@@ -43,6 +43,8 @@
 					echo "nextPage(" . $page . ", 'none');";
 				}
 			?>
+			</script>
+			<script>
 			function openPageInfo () {
 				$("#page-info").openModal();
 			}
