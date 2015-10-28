@@ -20,17 +20,19 @@ function getRandomBackground () {
 
 function getImagesFromFlickr () {
 	var randomNumber = Math.floor(Math.random() * 14) // Math.floor(Math.random() * (max - min + 1) + min);
+    randomNumber = 0;
 	$.getJSON(
 		"https://api.flickr.com/services/rest/",
 		{
 		  api_key: "44b97c4c2557f67865d1073bd2b6d0ea",
-		  method: 'flickr.galleries.getPhotos',
-		  gallery_id: '124649419-72157651208214636',
+		  method: 'flickr.groups.pools.getPhotos',
+		  group_id: '2759960@N25',
 		  format: 'json',
 		  nojsoncallback: 1,
 		  extras: 'url_z, url_o'
 		},
 		function (data) {
+            console.log(data);
 			var photo = data.photos.photo[randomNumber];
 		  	var url = getBackgroundURL (photo, 'url_z');
 		  	$('body').append($('<img/>').attr('src', url).load(function() {
@@ -49,6 +51,7 @@ function getImagesFromFlickr () {
 }
 
 function getBackgroundURL (photo, url) {
+    console.log(photo);
 	if (url == "url_z") {
 		if (photo.url_z) {
 			return photo.url_z;
